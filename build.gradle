@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.4'
+        classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
 apply plugin: 'android'
@@ -42,6 +42,7 @@ android {
 }
 
 tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
-   pkgTask.jniDir new File(projectDir, 'libs')
+   pkgTask.jniFolders = new HashSet<File>()
+   pkgTask.jniFolders.add(new File(projectDir, 'libs'))
 }
 
