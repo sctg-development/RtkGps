@@ -1,6 +1,8 @@
 JNI_TOP_PATH:= $(call my-dir)
 LOCAL_PATH := $(call my-dir)
 
+TARGET_PLATFORM := android-17
+
 include $(LOCAL_PATH)/rtklib.mk
 
 include $(CLEAR_VARS)
@@ -8,30 +10,21 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := rtkgps
 
 LOCAL_CFLAGS += -fvisibility=hidden
-
+LOCAL_C_INCLUDES := (LOCAL_PATH)/../jni/RTKLIB/src
 LOCAL_SRC_FILES := \
 	gtime.c \
 	prcopt.c \
 	rtkjni.c \
 	rtkcommon.c \
-        rtkserver.c \
+    rtkserver.c \
 	solopt.c
 
 LOCAL_STATIC_LIBRARIES := rtklib
 
 include $(BUILD_SHARED_LIBRARY)
 
-# Add prebuilt lib Dropox
-include $(CLEAR_VARS)
-LOCAL_MODULE := libDropboxSync
-LOCAL_SRC_FILES := ../libs/prebuilt/$(TARGET_ARCH_ABI)/libDropboxSync.so
-include $(PREBUILT_SHARED_LIBRARY)
-
 #Build proj4
 include $(CLEAR_VARS)
-LOCAL_PATH := $(JNI_TOP_PATH)
-TARGET_PLATFORM := android-14
-TARGET_ARCH_ABI := armeabi armeabi-v7a mips x86
 LOCAL_MODULE    := proj
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/proj-4.8.0/src
 LOCAL_CFLAGS    := -DJNI_ENABLED=1
@@ -195,6 +188,4 @@ LOCAL_SRC_FILES := \
 	proj-4.8.0/src/rtodms.c \
 	proj-4.8.0/src/vector1.c
 include $(BUILD_SHARED_LIBRARY)
-
-$(call import-module,simonlynen_android_libs/lapack/jni)
 
