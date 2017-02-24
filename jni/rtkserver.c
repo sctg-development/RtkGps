@@ -185,6 +185,9 @@ static jboolean RtkServer__rtksvrstart(JNIEnv* env, jclass thiz,
    if ((*env)->ExceptionOccurred(env))
       goto rtksvrstart_end;
 
+    char errmsg[2048]="";                       //  Modif Mathieu Peyréga : adapt to new 2.4.3b26 API
+    char *cmds_periodic[]={NULL,NULL,NULL};     //  Modif Mathieu Peyréga : adapt to new 2.4.3b26 API
+
    if (!rtksvrstart(
 	    &nctx->rtksvr,
 	    /* SvrCycle ms */ j_cycle,
@@ -194,13 +197,15 @@ static jboolean RtkServer__rtksvrstart(JNIEnv* env, jclass thiz,
 	    /* input stream format */ format,
 	    /* NavSelect */ j_navsel,
 	    /* input stream start commands */ (char **)cmds,
+        /* input stream periodic  commands */ (char **)cmds_periodic,   //  Modif Mathieu Peyréga : adapt to new 2.4.3b26 API
 	    /* receiver options */ (char **)rcvopts,
 	    /* nmea request cycle ms */ j_nmea_cycle,
 	    /* nmea request type */ j_nmea_req,
 	    /* transmitted nmea position  */ nmeapos,
 	    /* rtk processing options */&prcopt,
 	    /* solution options */ solopt,
-	    /* monitor stream */ &nctx->monistr
+	    /* monitor stream */ &nctx->monistr,
+        /* err */errmsg                                                  //  Modif Mathieu Peyréga : adapt to new 2.4.3b26 API
 	    )) {
    }else {
       res = JNI_TRUE;

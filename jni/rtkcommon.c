@@ -133,7 +133,7 @@ static void RtkCommon__deg2dms(JNIEnv* env, jclass clazz, jdouble j_deg,
       jdoubleArray j_dst)
 {
    double dms[3];
-   deg2dms(j_deg, dms);
+   deg2dms(j_deg, dms, 5);  //  Modif Mathieu Peyréga : adapt to new 2.4.3b26 API
    (*env)->SetDoubleArrayRegion(env, j_dst, 0, 3, dms);
 }
 
