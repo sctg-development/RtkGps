@@ -3,28 +3,44 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.4'
+        classpath 'com.android.tools.build:gradle:2.2.3'
     }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile files('libs/android-support-v13.jar')
+    compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'com.android.support:support-v13:25.0.0'
+    compile 'com.android.support:support-compat:25.0.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile 'com.jakewharton:butterknife:5.1.2'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }
 
 android {
+    signingConfigs {
+        RTKGPS_MP {
+            keyAlias 'RTKGPS_MP'
+            storeFile file('D:/asdzxc/RTKGPS_MP.jks')
+            keyPassword 'mdp4441'
+            storePassword 'mdp4441'
+        }
+    }
     compileSdkVersion 17
-    buildToolsVersion "17"
-
+    buildToolsVersion "24"
     defaultConfig {
-        minSdkVersion 14
+        applicationId "gpsplus.rtkgps"
+        minSdkVersion 17
         targetSdkVersion 17
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'mips', 'x86'
+        }
+        signingConfig signingConfigs.RTKGPS_MP
     }
     sourceSets {
         main {
@@ -35,13 +51,32 @@ android {
             renderscript.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
+            jniLibs.srcDir 'libs'
         }
 
-        instrumentTest.setRoot('tests')
+        //       instrumentTest.setRoot('tests')
     }
-}
-
-tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
-   pkgTask.jniDir new File(projectDir, 'libs')
+    externalNativeBuild {
+        ndkBuild {
+            path 'jni/Android.mk'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable false
+            renderscriptDebuggable false
+            signingConfig signingConfigs.RTKGPS_MP
+        }
+        release {
+            signingConfig signingConfigs.RTKGPS_MP
+        }
+    }
+    productFlavors {
+    }
 }
 
