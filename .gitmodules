@@ -3,4 +3,4 @@
 	url = git://github.com/simonlynen/android_libs.git
 [submodule "jni/RTKLIB"]
 	path = jni/RTKLIB
-	url = https://github.com/eltorio/RTKLIB.git
+	url = https://github.com/ausioz/RTKLIB.git
