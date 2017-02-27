@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="8"
-                    android:inputType="numberDecimal" >
+                    android:inputType="numberSigned|numberDecimal">
 
                     <requestFocus />
                 </EditText>
@@ -71,7 +71,8 @@
                     android:id="@+id/coord2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberSigned|numberDecimal"
+                    />
             </TableRow>
 
             <TableRow
@@ -92,7 +93,7 @@
                     android:id="@+id/coord3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberSigned|numberDecimal"/>
             </TableRow>
         </TableLayout>
     
