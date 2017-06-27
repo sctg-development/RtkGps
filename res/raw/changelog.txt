@@ -19,7 +19,12 @@
     </style>
   </head>
   <body>
-  $ 1.0 alpha 25
+$ 1.0 alpha 26
+   % Build 26
+   _ 2017-06-27
+      * RTKExplorer RTKLIB Demo 5 B28 code integration first attempt
+      * TODO Full RTKLIB integer ambiguity settings Fix translations
+$ 1.0 alpha 25
      % Build 25
     _ 2017-06-27
       * Migration to Android Studio 2.3.3
