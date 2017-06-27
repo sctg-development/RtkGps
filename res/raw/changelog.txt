@@ -19,6 +19,13 @@
     </style>
   </head>
   <body>
+  $ 1.0 alpha 25
+     % Build 25
+    _ 2017-06-27
+      * Migration to Android Studio 2.3.3
+      * Add compile for Galileo & BeiDou
+      * Remove deprecated Dropbox
+      * TODO Full RTKLIB integer ambiguity settings Fix translations RTKExplorer RTKLIB Demo 5 code integration
 $ 1.0 alpha 24
    % Build 24
   _ 2014-10-31

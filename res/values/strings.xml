@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">RTKGPS+</string>
-    <string name="app_url">http://github.com/eltorio/RtkGps</string>
+    <string name="app_url">http://github.com/GPSFan/RtkGps</string>
     <string name="app_version_label">Version</string>
     <string name="app_legacy_info_label">Legacy info</string>
     <string name="about_licenses">Legacy info</string>
