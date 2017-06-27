@@ -69,8 +69,4 @@
     public void handleSilentException(java.lang.Throwable);
 }
 
-#dropbox
--keep class com.dropbox.** {*;}
--dontwarn com.dropbox.ledger**
-
 #jscience

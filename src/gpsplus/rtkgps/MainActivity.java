@@ -28,7 +28,7 @@ import android.widget.Switch;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import com.dropbox.sync.android.DbxAccountManager;
+// import com.dropbox.sync.android.DbxAccountManager;
 
 import gpsplus.rtkgps.settings.ProcessingOptions1Fragment;
 import gpsplus.rtkgps.settings.SettingsActivity;
@@ -48,7 +48,7 @@ import javax.annotation.Nonnull;
 public class MainActivity extends Activity {
 
     private static final boolean DBG = BuildConfig.DEBUG & true;
-    public static final int REQUEST_LINK_TO_DBX = 2654;
+//    public static final int REQUEST_LINK_TO_DBX = 2654;
     static final String TAG = MainActivity.class.getSimpleName();
 
     /**
@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
     public static final String APP_KEY = "6ffqsgh47v9y5dc";
     public static final String APP_SECRET = "hfmsbkv4ktyl60h";
-    private DbxAccountManager mDbxAcctMgr;
+//    private DbxAccountManager mDbxAcctMgr;
 
     RtkNaviService mRtkService;
     boolean mRtkServiceBound = false;
@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-        mDbxAcctMgr = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, APP_SECRET);
+//        mDbxAcctMgr = DbxAccountManager.getInstance(getApplicationContext(), APP_KEY, APP_SECRET);
 
         mDemoModeLocation = new DemoModeLocation(this.getApplicationContext());
 
@@ -206,10 +206,10 @@ public class MainActivity extends Activity {
         menu.findItem(R.id.menu_start_service).setVisible(!serviceActive);
         menu.findItem(R.id.menu_stop_service).setVisible(serviceActive);
         menu.findItem(R.id.menu_tools).setVisible(true);
-        if (mDbxAcctMgr.hasLinkedAccount())
-        {
-            menu.findItem(R.id.menu_dropbox).setVisible(false);
-        }
+//        if (mDbxAcctMgr.hasLinkedAccount())
+//        {
+//            menu.findItem(R.id.menu_dropbox).setVisible(false);
+//        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -230,9 +230,9 @@ public class MainActivity extends Activity {
         case R.id.menu_tools:
             startActivity(new Intent(this, ToolsActivity.class));
             break;
-        case R.id.menu_dropbox:
-            mDbxAcctMgr.startLink(this, REQUEST_LINK_TO_DBX);
-            break;
+//        case R.id.menu_dropbox:
+//            mDbxAcctMgr.startLink(this, REQUEST_LINK_TO_DBX);
+//            break;
         case R.id.menu_settings:
             mDrawerLayout.openDrawer(mNavDrawer);
             break;
@@ -483,15 +483,15 @@ public class MainActivity extends Activity {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_LINK_TO_DBX) {
-            if (resultCode == Activity.RESULT_OK) {
+//        if (requestCode == REQUEST_LINK_TO_DBX) {
+//            if (resultCode == Activity.RESULT_OK) {
                 // ... Start using Dropbox files.
-            } else {
+//            } else {
                 // ... Link failed or was cancelled by the user.
-            }
-        } else {
+ //           }
+ //       } else {
             super.onActivityResult(requestCode, resultCode, data);
-        }
+ //       }
     }
     public static String getApplicationDirectory() {
         return MainActivity.mApplicationDirectory;

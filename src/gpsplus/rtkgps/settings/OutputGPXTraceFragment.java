@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 
-import com.dropbox.sync.android.DbxAccountManager;
+//import com.dropbox.sync.android.DbxAccountManager;
 
 import gpsplus.rtkgps.MainActivity;
 import gpsplus.rtkgps.R;
@@ -27,7 +27,7 @@ public class OutputGPXTraceFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         getPreferenceManager().setSharedPreferencesName(SHARED_PREFS_NAME);
         addPreferencesFromResource(R.xml.output_gpxtrace_settings);
-
+/*
      // Setup on change listener for checkbox - to track when user turns if off
         super.findPreference(KEY_SYNCDROPBOX)
         .setOnPreferenceChangeListener( new OnPreferenceChangeListener(){
@@ -47,6 +47,7 @@ public class OutputGPXTraceFragment extends PreferenceFragment {
                                             return true; // Finally, let the checkbox value go through to update itself
                                         }
                                     }); // end of checkbox listener
+ */
     }
 
     public Context getApplicationContext() {

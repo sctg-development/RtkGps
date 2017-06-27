@@ -7,7 +7,7 @@ import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 
-import com.dropbox.sync.android.DbxAccountManager;
+//import com.dropbox.sync.android.DbxAccountManager;
 
 import gpsplus.rtkgps.BuildConfig;
 import gpsplus.rtkgps.MainActivity;
@@ -24,8 +24,8 @@ public class StreamFileClientFragment extends PreferenceFragment {
     private static final boolean DBG = BuildConfig.DEBUG & true;
 
     private static final String KEY_FILENAME = "stream_file_filename";
-    public static final String KEY_SYNCDROPBOX = "syncdropbox";
-    public static final String KEY_ZIPBEFORESYNCING = "zipbeforesync";
+//    public static final String KEY_SYNCDROPBOX = "syncdropbox";
+//    public static final String KEY_ZIPBEFORESYNCING = "zipbeforesync";
     public static final String KEY_ENABLE = "enable";
 
     private final PreferenceChangeListener mPreferenceChangeListener;
@@ -130,18 +130,18 @@ public class StreamFileClientFragment extends PreferenceFragment {
         @Override
         public void onSharedPreferenceChanged(
                 SharedPreferences sharedPreferences, String key) {
-            if (key.equals(KEY_SYNCDROPBOX))
-            {
-                if (sharedPreferences.getBoolean(KEY_SYNCDROPBOX, false))
-                {
-                    DbxAccountManager mDbxAcctMgr;
-                    mDbxAcctMgr = DbxAccountManager.getInstance(getApplicationContext(), MainActivity.APP_KEY, MainActivity.APP_SECRET);
-                    if (!mDbxAcctMgr.hasLinkedAccount())
-                    {
-                        mDbxAcctMgr.startLink(getActivity(), MainActivity.REQUEST_LINK_TO_DBX);
-                    }
-                }
-            }
+//            if (key.equals(KEY_SYNCDROPBOX))
+//            {
+//                if (sharedPreferences.getBoolean(KEY_SYNCDROPBOX, false))
+//                {
+//                    DbxAccountManager mDbxAcctMgr;
+//                    mDbxAcctMgr = DbxAccountManager.getInstance(getApplicationContext(), MainActivity.APP_KEY, MainActivity.APP_SECRET);
+//                    if (!mDbxAcctMgr.hasLinkedAccount())
+//                    {
+//                        mDbxAcctMgr.startLink(getActivity(), MainActivity.REQUEST_LINK_TO_DBX);
+//                    }
+//                }
+//            }
             reloadSummaries();
         }
     };

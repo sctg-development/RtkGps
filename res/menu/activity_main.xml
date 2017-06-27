@@ -16,11 +16,7 @@
 		android:showAsAction="never"
 		android:title="@string/menu_settings"
 		android:orderInCategory="200" />
-	<item
-		android:id="@+id/menu_dropbox"
-		android:showAsAction="never"
-		android:title="@string/menu_dropbox"
-		android:orderInCategory="200" />
+
 	<item
 	    android:id="@+id/menu_tools"
 	    android:showAsAction="never"
@@ -30,6 +26,6 @@
 		android:id="@+id/menu_about"
 		android:showAsAction="never"
 		android:title="@string/menu_about"
-		android:orderInCategory="300" />
+		android:orderInCategory="200" />
 	
 </menu>

@@ -21,13 +21,13 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.dropbox.sync.android.DbxAccountManager;
-import com.dropbox.sync.android.DbxException;
-import com.dropbox.sync.android.DbxException.Unauthorized;
-import com.dropbox.sync.android.DbxFile;
-import com.dropbox.sync.android.DbxFileSystem;
-import com.dropbox.sync.android.DbxPath;
-import com.dropbox.sync.android.DbxPath.InvalidPathException;
+//import com.dropbox.sync.android.DbxAccountManager;
+//import com.dropbox.sync.android.DbxException;
+//import com.dropbox.sync.android.DbxException.Unauthorized;
+//import com.dropbox.sync.android.DbxFile;
+//import com.dropbox.sync.android.DbxFileSystem;
+//import com.dropbox.sync.android.DbxPath;
+//import com.dropbox.sync.android.DbxPath.InvalidPathException;
 
 import gpsplus.rtkgps.settings.LogBaseFragment;
 import gpsplus.rtkgps.settings.LogRoverFragment;
@@ -304,7 +304,7 @@ public class RtkNaviService extends IntentService implements LocationListener
         }
         stop();
         finalizeGpxTrace();
-        syncDropbox();
+//        syncDropbox();
         stopSelf();
     }
 
@@ -312,16 +312,16 @@ public class RtkNaviService extends IntentService implements LocationListener
         if (mBoolGenerateGPXTrace && (mGpxTrace != null))
         {
             SharedPreferences prefs= this.getBaseContext().getSharedPreferences(OutputGPXTraceFragment.SHARED_PREFS_NAME, 0);
-            if(prefs.getBoolean(OutputGPXTraceFragment.KEY_SYNCDROPBOX, false))
-                {
-                    String szFilename = prefs.getString(OutputGPXTraceFragment.KEY_FILENAME, "");
-                    if (szFilename.length()>0)
-                    {
-                        String szPath = MainActivity.getFileStorageDirectory() + File.separator + szFilename;
-                        mGpxTrace.writeFile(szPath);
-                    }
-
-                }
+//            if(prefs.getBoolean(OutputGPXTraceFragment.KEY_SYNCDROPBOX, false))
+//                {
+//                    String szFilename = prefs.getString(OutputGPXTraceFragment.KEY_FILENAME, "");
+//                    if (szFilename.length()>0)
+//                    {
+//                        String szPath = MainActivity.getFileStorageDirectory() + File.separator + szFilename;
+//                        mGpxTrace.writeFile(szPath);
+//                    }
+//
+//                }
         }
 
     }
@@ -330,7 +330,7 @@ public class RtkNaviService extends IntentService implements LocationListener
     {
         return filename+".zip";
     }
-
+/*
     private String insertDateTimeInDropboxFilename(String file)
     {
         File _file = new File(file);
@@ -452,7 +452,7 @@ public class RtkNaviService extends IntentService implements LocationListener
              }
         }
     }
-
+*/
     private void stop() {
         stopForeground(true);
         if (mCpuLock.isHeld()) mCpuLock.release();
