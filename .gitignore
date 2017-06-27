@@ -9,6 +9,10 @@
 
 /.apt_generated/
 /.lint4jprefs
+/.externalNativeBuild
+/.settings
+/.idea
+/.gradle
 /lint.xml
 /proguard/
 /projectSet.psf
@@ -19,7 +23,6 @@
 /libs/armeabi/librtkgps.so
 /libs/x86/librtkgps.so
 
-/.gradle
 /build
 
 
