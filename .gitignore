@@ -2,7 +2,7 @@
 *.swp
 *.DS_Store*
 
-/bin
+
 /trash
 /gen
 /local.properties
