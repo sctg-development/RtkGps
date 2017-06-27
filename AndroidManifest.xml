@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gpsplus.rtkgps"
     android:versionCode="24"
-    android:versionName="1.0 alpha 24" >
+    android:versionName="1.0 alpha 25" >
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="18"
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -99,22 +99,8 @@
 		<meta-data
 		    android:name="com.google.android.gms.version"
 		    android:value="@integer/google_play_services_version" />
-		<activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
-		<activity
-		  android:name="com.dropbox.client2.android.AuthActivity"
-		  android:launchMode="singleTask" >
-		  <intent-filter>
-		    <data android:scheme="db-6ffqsgh47v9y5dc" />
-		    <action android:name="android.intent.action.VIEW" />
-		    <category android:name="android.intent.category.BROWSABLE" />
-		    <category android:name="android.intent.category.DEFAULT" />
-		  </intent-filter>
-		</activity>
-		<service
-		  android:name="com.dropbox.sync.android.DbxSyncService"
-		  android:enabled="true"
-		  android:exported="false"
-		  android:label="Dropbox Sync" />
+
+
     </application>
 
 </manifest>

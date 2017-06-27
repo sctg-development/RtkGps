@@ -1,22 +1,21 @@
 JNI_TOP_PATH:= $(call my-dir)
 LOCAL_PATH := $(call my-dir)
 
-TARGET_PLATFORM := android-17
+TARGET_PLATFORM := android-18
 
 include $(LOCAL_PATH)/rtklib.mk
 
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := rtkgps
-
 LOCAL_CFLAGS += -fvisibility=hidden
-LOCAL_C_INCLUDES := (LOCAL_PATH)/../jni/RTKLIB/src
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../jni/RTKLIB/src
 LOCAL_SRC_FILES := \
 	gtime.c \
 	prcopt.c \
 	rtkjni.c \
 	rtkcommon.c \
-    rtkserver.c \
+	rtkserver.c \
 	solopt.c
 
 LOCAL_STATIC_LIBRARIES := rtklib

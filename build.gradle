@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 apply plugin: 'com.android.application'
@@ -22,25 +22,17 @@ dependencies {
 }
 
 android {
-    signingConfigs {
-        RTKGPS_MP {
-            keyAlias 'RTKGPS_MP'
-            storeFile file('D:/asdzxc/RTKGPS_MP.jks')
-            keyPassword 'mdp4441'
-            storePassword 'mdp4441'
-        }
-    }
-    compileSdkVersion 17
-    buildToolsVersion "24"
+
+    compileSdkVersion 18
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "gpsplus.rtkgps"
-        minSdkVersion 17
-        targetSdkVersion 17
+        minSdkVersion 18
+        targetSdkVersion 18
         multiDexEnabled true
         ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'mips', 'x86'
+            abiFilters 'armeabi', 'armeabi-v7a'
         }
-        signingConfig signingConfigs.RTKGPS_MP
     }
     sourceSets {
         main {
@@ -70,11 +62,9 @@ android {
             debuggable true
             jniDebuggable false
             renderscriptDebuggable false
-            signingConfig signingConfigs.RTKGPS_MP
+
         }
-        release {
-            signingConfig signingConfigs.RTKGPS_MP
-        }
+
     }
     productFlavors {
     }
