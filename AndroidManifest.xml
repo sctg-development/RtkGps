@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gpsplus.rtkgps"
-    android:versionCode="24"
-    android:versionName="1.0 alpha 25" >
+    android:versionCode="26"
+    android:versionName="1.0 alpha 26" >
 
     <uses-sdk
         android:minSdkVersion="18"
