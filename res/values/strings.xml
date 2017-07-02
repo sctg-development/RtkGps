@@ -320,8 +320,8 @@
         <item>40</item>
     </string-array>
     
-    <string name="procopt_ambiguity_resolution_title">Integer ambiguity resolution</string>
-    <string name="procopt_ambiguity_resolution_dialog_title">Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_resolution_title">GPS Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_resolution_dialog_title">GPS Integer ambiguity resolution</string>
     <string-array name="procopt_ambiguity_resolution_entries">
         <item>Off</item>
         <item>Continuous</item>
@@ -338,6 +338,7 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
     <string name="procopt_ambiguity_glonass_resolution_title">Glonass integer ambiguity resolution</string>
     <string-array name="procopt_glonass_ambiguity_resolution_entries">
         <item>Off</item>
@@ -349,21 +350,63 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string name="procopt_ambiguity_gps_resolution_title">GPS integer ambiguity resolution</string>
+    <string-array name="procopt_gps_ambiguity_resolution_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_gps_ambiguity_resolution_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+
+    <string name="procopt_ambiguity_bds_resolution_title">BeiDou integer ambiguity resolution</string>
+    <string-array name="procopt_bds_ambiguity_resolution_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_bds_ambiguity_resolution_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <string name="procopt_ambiguity_resolution_sub_preference_title">Integer ambiguity resolution settings</string>
+
+    <!-- implemented so far -->
     <string name="procopt_min_ratio_to_fix_ambiguity_title">Min ratio to fix ambiguity</string>
-    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity</string>
-    <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity</string>
-    <string name="procopt_min_elevation_to_fix_ambiguity_title">Min elevation to fix ambiguity</string>
     <string name="procopt_min_lock_to_fix_ambiguity_title">Min lock to fix ambiguity</string>
+    <string name="procopt_min_elevation_to_fix_ambiguity_title">Min elevation to fix ambiguity</string>
+
+    <!-- not yet -->
     <string name="procopt_min_fix_to_hold_ambiguity_title">Min fix to hold ambiguity</string>
     <string name="procopt_min_elevation_to_hold_ambiguity_title">Min elevation to hold ambiguity</string>
+    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity</string>
+    <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity</string>
     <string name="procopt_outage_to_reset_ambiguity_title">Outage to reset ambiguity</string>
     <string name="procopt_slip_threshold_title">Slip threshold (m)</string>
     <string name="procopt_max_age_of_diff_s_title">Max age of diff (s)</string>
     <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP</string>
     <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m)</string>
+
+    <!-- rtkexplorer -->
     <string name="procopt_number_of_filter_iteration_title">Number of filter iteration</string>
-    
+    <string name="procopt_varholdamb_title">Variance fix and hold (cycle^2)</string>
+    <string name="procopt_gainholdamb_title">Gain for GLO and SBAS to adjust ambiguity</string>
+    <string name="procopt_rcvstds_title">Use Stdevs</string>
+    <string name="procopt_minholdsats_title">Minimum sats to hold integer ambiguity</string>
+    <string name="procopt_mindropsats_title">Minimum sats tor drop sats in AR</string>
+    <string name="procopt_arfilter_title">AR filtering to reject bad sats</string>
+    <string-array name="procopt_arfilter_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_arfilter_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <!-- Rec dynamics / Earth tides correction -->
     <string name="procopt_rec_dynamics_title">Rec dynamics</string>
     <string name="procopt_rec_dynamics_summary">Estimate receiver velocity and acceleration</string>

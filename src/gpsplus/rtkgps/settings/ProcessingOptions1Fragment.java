@@ -59,6 +59,10 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     public static final String KEY_PROCESSING_CYCLE = "processing_cycle";
     public static final String KEY_AMBIGUITY_RESOLUTION = "ambiguity_resolution";
     public static final String KEY_GLONASS_AMBIGUITY_RESOLUTION ="glonass_ambiguity_resolution";
+
+    public static final String KEY_GPS_AMBIGUITY_RESOLUTION ="gps_ambiguity_resolution";
+    public static final String KEY_BDS_AMBIGUITY_RESOLUTION ="bds_ambiguity_resolution";
+
     public static final String KEY_MIN_FIX_RATIO ="min_fix_ratio";
     private static final String KEY_MIN_FIX_ELEVATION = "min_fix_elevation";
     private static final String KEY_MIN_FIX_LOCK = "min_fix_lock";
@@ -71,6 +75,10 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     private ListPreference mSnrMaskPref;
     private ListPreference mAmbiguityResolutionPref;
     private ListPreference mGlonassAmbiguityResolutionPref;
+
+    private ListPreference mGpsAmbiguityResolutionPref;
+    private ListPreference mBDSAmbiguityResolutionPref;
+
     private EarthTideCorrectionPreference mEarthTidesCorrPref;
     private IonosphereCorrectionPreference mIonosphereCorrectionPref;
     private TroposphereCorrectionPreference mTroposphereCorrectionPref;
@@ -151,6 +159,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         mGlonassAmbiguityResolutionPref = (ListPreference)findPreference(KEY_GLONASS_AMBIGUITY_RESOLUTION);
 
+        mGpsAmbiguityResolutionPref = (ListPreference)findPreference(KEY_GPS_AMBIGUITY_RESOLUTION);
+
+        mBDSAmbiguityResolutionPref = (ListPreference)findPreference(KEY_BDS_AMBIGUITY_RESOLUTION);
+
+
         mMinRatioFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_RATIO);
 
         mMinLockFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_LOCK);
@@ -174,6 +187,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         summary = mGlonassAmbiguityResolutionPref.getEntry();
         mGlonassAmbiguityResolutionPref.setSummary(summary);
+
+        summary = mGpsAmbiguityResolutionPref.getEntry();
+        mGpsAmbiguityResolutionPref.setSummary(summary);
+
+        summary = mBDSAmbiguityResolutionPref.getEntry();
+        mBDSAmbiguityResolutionPref.setSummary(summary);
 
         summary = mMinRatioFixPref.getText();
         mMinRatioFixPref.setSummary(summary);
@@ -226,6 +245,10 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         findPreference(KEY_EXCLUDE_ECLIPSING).setEnabled(rel || ppp);
         findPreference(KEY_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
         findPreference(KEY_GLONASS_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
+
+        findPreference(KEY_GPS_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
+        findPreference(KEY_BDS_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
+
         findPreference(KEY_MIN_FIX_ELEVATION).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_LOCK).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_RATIO).setEnabled(rtk || ppp);
@@ -279,9 +302,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         opts.setModeAR(Integer.valueOf(prefs.getString(KEY_AMBIGUITY_RESOLUTION, "0")));
         opts.setModeGAR(Integer.valueOf(prefs.getString(KEY_GLONASS_AMBIGUITY_RESOLUTION, "0")));
+
+        opts.setModeGpsAR(Integer.valueOf(prefs.getString(KEY_GPS_AMBIGUITY_RESOLUTION, "0")));
+        opts.setModeBDSAR(Integer.valueOf(prefs.getString(KEY_BDS_AMBIGUITY_RESOLUTION, "0")));
+
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
         opts.setMinElevationToFixAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
         opts.setMinLockToFixAmbiguity(Integer.parseInt(prefs.getString(KEY_MIN_FIX_LOCK, "0")));
+
 
         SharedPreferences roverPrefs = ctx.getSharedPreferences(InputRoverFragment.SHARED_PREFS_NAME, Activity.MODE_PRIVATE);
         opts.setAntTypeRover(roverPrefs.getString(InputRoverFragment.KEY_ANTENNA, ""));
@@ -329,6 +357,8 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putBoolean(KEY_RAIM_FDE, opts.isRaimFdeEnabled())
         .putString(KEY_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeAR()))
         .putString(KEY_GLONASS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeGAR()))
+        .putString(KEY_GPS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeGpsAR()))
+        .putString(KEY_BDS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeBDSAR()))
         .commit()
         ;
         if (DBG) {

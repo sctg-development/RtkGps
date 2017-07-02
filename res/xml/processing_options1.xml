@@ -29,39 +29,62 @@
         android:key="snr_mask"
         android:title="@string/procopt_snr_mask_title" />
 
-    <PreferenceScreen
-	    android:key="button_ambiguity_setting_key"
-	    android:title="@string/procopt_ambiguity_resolution_sub_preference_title">
-	    <ListPreference
-	        android:dialogTitle="@string/procopt_ambiguity_resolution_dialog_title"
-	        android:entries="@array/procopt_ambiguity_resolution_entries"
-	        android:entryValues="@array/procopt_ambiguity_resolution_values"
-	        android:key="ambiguity_resolution"
-	        android:defaultValue="0"
-	        android:title="@string/procopt_ambiguity_resolution_title" />
-	    <ListPreference 
-	        android:dialogTitle="@string/procopt_ambiguity_glonass_resolution_title"
-	        android:entries="@array/procopt_glonass_ambiguity_resolution_entries"
-	        android:entryValues="@array/procopt_glonass_ambiguity_resolution_values"
-	        android:key="glonass_ambiguity_resolution"
-	        android:defaultValue="0"
-	        android:title="@string/procopt_ambiguity_glonass_resolution_title"/>
-	    <EditTextPreference
-	          android:inputType="numberDecimal"
-			  android:defaultValue="3.0"
-			  android:title="@string/procopt_min_ratio_to_fix_ambiguity_title"
-			  android:key="min_fix_ratio" />
-	    <EditTextPreference
-	          android:inputType="number"
-			  android:defaultValue="0"
-			  android:title="@string/procopt_min_lock_to_fix_ambiguity_title"
-			  android:key="min_fix_lock" />
-	    <EditTextPreference
-	          android:inputType="numberDecimal"
-			  android:defaultValue="0"
-			  android:title="@string/procopt_min_elevation_to_fix_ambiguity_title"
-			  android:key="min_fix_elevation" />
+	<PreferenceScreen
+		android:key="button_ambiguity_setting_key"
+		android:title="@string/procopt_ambiguity_resolution_sub_preference_title">
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_ambiguity_resolution_dialog_title"
+			android:entries="@array/procopt_ambiguity_resolution_entries"
+			android:entryValues="@array/procopt_ambiguity_resolution_values"
+			android:key="ambiguity_resolution"
+			android:title="@string/procopt_ambiguity_resolution_title" />
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_ambiguity_glonass_resolution_title"
+			android:entries="@array/procopt_glonass_ambiguity_resolution_entries"
+			android:entryValues="@array/procopt_glonass_ambiguity_resolution_values"
+			android:key="glonass_ambiguity_resolution"
+			android:title="@string/procopt_ambiguity_glonass_resolution_title" />
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_ambiguity_gps_resolution_title"
+			android:entries="@array/procopt_gps_ambiguity_resolution_entries"
+			android:entryValues="@array/procopt_gps_ambiguity_resolution_values"
+			android:key="gps_ambiguity_resolution"
+			android:title="@string/procopt_ambiguity_gps_resolution_title" />
+
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_ambiguity_bds_resolution_title"
+			android:entries="@array/procopt_bds_ambiguity_resolution_entries"
+			android:entryValues="@array/procopt_bds_ambiguity_resolution_values"
+			android:key="bds_ambiguity_resolution"
+			android:title="@string/procopt_ambiguity_bds_resolution_title" />
+
+
+		<EditTextPreference
+			android:defaultValue="3.0"
+			android:inputType="numberDecimal"
+			android:key="min_fix_ratio"
+			android:title="@string/procopt_min_ratio_to_fix_ambiguity_title" />
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="number"
+			android:key="min_fix_lock"
+			android:title="@string/procopt_min_lock_to_fix_ambiguity_title" />
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="min_fix_elevation"
+			android:title="@string/procopt_min_elevation_to_fix_ambiguity_title" />
+
+
+
 	</PreferenceScreen>
+
     <CheckBoxPreference
         android:key="rec_dynamics"
         android:summary="@string/procopt_rec_dynamics_summary"

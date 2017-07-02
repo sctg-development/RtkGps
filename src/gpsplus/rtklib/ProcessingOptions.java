@@ -107,6 +107,39 @@ public class ProcessingOptions {
         /** GLONASS AR mode (0:off,1:on,2:auto cal,3:ext cal) */
         private int glomodear;
 
+	/** rtkexplorer stuff */
+
+	/** GPS AR mode (o:off,1:on)  */
+	private int gpsmodear;
+
+	/** BeiDou AR mode (0:off,1:on)  */
+	private int bdsmodear;
+
+	/** AR filtering to reject bad sats (0:off,1:on)  */
+	private int arfilter;
+
+	private int minholdsats;    /* min sats to hold integer ambiguities */
+
+	private int mindropsats;    /* min sats to drop sats in AR */
+
+	private int rcvstds;        /* use stdev estimates from receiver to adjust measurement variances */
+
+	private int armaxiter;      /* max iteration to resolve ambiguity */
+
+	private double varholdamb;  /* variance for fix-and-hold psuedo measurements (cycle^2) */
+
+	private double gainholdamb; /* gain used for GLO and SBAS sats to adjust ambiguity */
+
+	private int  maxaveep;      /* max averaging epoches */
+
+	private int  initrst;       /* initialize by restart */
+
+	private int  outsingle;     /* output single by dgps/float/fix/ppp outage */
+
+	private int  syncsol;       /* solution sync mode (0:off,1:on) */
+
+	private int freqopt;        /* disable L2-AR */
+
         /** obs outage count to reset bias */
         private int maxout;
 
@@ -263,6 +296,23 @@ public class ProcessingOptions {
         mNative.sateph = src.mNative.sateph;
         mNative.modear = src.mNative.modear;
         mNative.glomodear = src.mNative.glomodear;
+
+	mNative.gpsmodear = src.mNative.gpsmodear;
+	mNative.bdsmodear = src.mNative.bdsmodear;
+	mNative.arfilter = src.mNative.arfilter;
+	mNative.minholdsats = src.mNative.minholdsats;
+	mNative.mindropsats = src.mNative.mindropsats;
+	mNative.rcvstds = src.mNative.rcvstds;
+	mNative.armaxiter = src.mNative.armaxiter;
+	mNative.varholdamb = src.mNative.varholdamb;
+	mNative.gainholdamb = src.mNative.gainholdamb;
+	mNative.maxaveep = src.mNative.maxaveep;
+	mNative.initrst = src.mNative.initrst;
+	mNative.outsingle = src.mNative.outsingle;
+	mNative.syncsol = src.mNative.syncsol;
+	mNative.freqopt = src.mNative.freqopt;
+
+
         mNative.maxout = src.mNative.maxout;
         mNative.minlock = src.mNative.minlock;
         mNative.minfix = src.mNative.minfix;
@@ -365,6 +415,7 @@ public class ProcessingOptions {
     public void setModeAR(int mode){
         this.mNative.modear = mode;
     }
+
     /**
      * get glonass ambiguity resolution mode
      * GLONASS AR mode (0:off,1:on,2:auto cal,3:ext cal)
@@ -381,6 +432,121 @@ public class ProcessingOptions {
     public void setModeGAR(int mode){
         this.mNative.glomodear = mode;
     }
+
+
+    /**
+     * get gps ambiguity resolution mode
+     * GPS AR mode (0:off,1:on)
+     * @return
+     */
+    public int getModeGpsAR(){
+        return this.mNative.gpsmodear;
+    }
+
+    /**
+     * set gps ambiguity resolution mode
+     * @param mode GPS AR mode (0:off,1:on)
+     */
+    public void setModeGpsAR(int mode){
+        this.mNative.gpsmodear = mode;
+    }
+
+
+    /**
+     * get beidou ambiguity resolution mode
+     * BDS AR mode (0:off,1:on)
+     * @return
+     */
+    public int getModeBDSAR(){
+        return this.mNative.bdsmodear;
+    }
+
+    /**
+     * set beidou ambiguity resolution mode
+     * @param mode BDS AR mode (0:off,1:on)
+     */
+    public void setModeBDSAR(int mode){
+        this.mNative.bdsmodear = mode;
+    }
+
+    public void setARFilter(int filter){
+        this.mNative.arfilter = filter;
+    }
+    public int getARFilter(){
+        return this.mNative.arfilter;
+    }
+
+    public void setMinHoldToFixAmbiguity(int minhold){
+        this.mNative.minholdsats = minhold;
+    }
+    public int getMinHoldToFixAmbiguity(){
+        return this.mNative.minholdsats;
+    }
+
+    public void setMindropToFixAmbiguity(int mindrop){
+        this.mNative.mindropsats = mindrop;
+    }
+    public int getMinDropToFixAmbiguity(){
+        return this.mNative.mindropsats;
+    }
+
+    public void setMaxIterToFixAmbiguity(int maxiter){
+        this.mNative.armaxiter = maxiter;
+    }
+    public int getMaxIterToFixAmbiguity(){
+        return this.mNative.armaxiter;
+    }
+
+    public void setVarHoldAmbiguity(double varhold){
+        this.mNative.varholdamb = varhold;
+    }
+    public double getVarHoldAmbiguity(){
+        return this.mNative.varholdamb;
+    }
+
+    public void setGainHoldAmbiguity(double gainhold){
+        this.mNative.gainholdamb = gainhold;
+    }
+    public double getGainHoldAmbiguity(){
+        return this.mNative.gainholdamb;
+    }
+
+    public void setMaxAVeep(int mveep){
+        this.mNative.maxaveep = mveep;
+    }
+    public int getMaxAVeep(){
+        return this.mNative.maxaveep;
+    }
+
+    public void setInitRst(int rst){
+        this.mNative.initrst = rst;
+    }
+    public int getInitRst(){
+        return this.mNative.initrst;
+    }
+
+    public void setOutSingle(int outs){
+        this.mNative.outsingle = outs;
+    }
+    public int getOutSingle(){
+        return this.mNative.outsingle;
+    }
+
+    public void setSyncSol(int synsol){
+        this.mNative.syncsol = synsol;
+    }
+    public int getSyncSol(){
+        return this.mNative.syncsol;
+    }
+
+    public void setFreqOpt(int fopt){
+        this.mNative.freqopt = fopt;
+    }
+    public int getFreqOpt(){
+        return this.mNative.freqopt;
+    }
+
+
     /**
      * set the Min ratio to fix ambiguity
      * @param thres ratio

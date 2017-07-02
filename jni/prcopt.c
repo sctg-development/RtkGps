@@ -22,6 +22,25 @@ static struct {
    jfieldID sateph;
    jfieldID modear;
    jfieldID glomodear;
+
+// Advanced options for rtkexplorer
+   jfieldID gpsmodear;
+   jfieldID bdsmodear;
+   jfieldID arfilter;
+   jfieldID minholdsats;
+   jfieldID mindropsats;
+   jfieldID rcvstds;
+   jfieldID armaxiter;
+   jfieldID varholdamb;
+   jfieldID gainholdamb;
+   jfieldID maxaveep;
+   jfieldID initrst;
+   jfieldID outsingle;
+   jfieldID syncsol;
+   jfieldID freqopt;
+
+//
+
    jfieldID maxout;
    jfieldID minlock;
    jfieldID minfix;
@@ -168,6 +187,22 @@ void processing_options2prcopt_t(JNIEnv* env, jobject thiz, prcopt_t *dst)
    GET_FIELD(sateph, Int)
    GET_FIELD(modear, Int)
    GET_FIELD(glomodear, Int)
+
+   GET_FIELD(gpsmodear, Int)
+   GET_FIELD(bdsmodear, Int)
+   GET_FIELD(arfilter, Int)
+   GET_FIELD(minholdsats, Int)
+   GET_FIELD(mindropsats, Int)
+   GET_FIELD(rcvstds, Int)
+   GET_FIELD(armaxiter, Int)
+   GET_FIELD(varholdamb, Double)
+   GET_FIELD(gainholdamb, Double)
+   GET_FIELD(maxaveep, Int)
+   GET_FIELD(initrst, Int)
+   GET_FIELD(outsingle, Int)
+   GET_FIELD(syncsol, Int)
+   GET_FIELD(freqopt, Int)
+
    GET_FIELD(maxout, Int)
    GET_FIELD(minlock, Int)
    GET_FIELD(minfix, Int)
@@ -314,6 +349,22 @@ static void ProcessingOptions_load_defaults(JNIEnv* env, jobject thiz)
    SET_FIELD(sateph, Int)
    SET_FIELD(modear, Int)
    SET_FIELD(glomodear, Int)
+
+   SET_FIELD(gpsmodear, Int)
+   SET_FIELD(bdsmodear, Int)
+   SET_FIELD(arfilter, Int)
+   SET_FIELD(minholdsats, Int)
+   SET_FIELD(mindropsats, Int)
+   SET_FIELD(rcvstds, Int)
+   SET_FIELD(armaxiter, Int)
+   SET_FIELD(varholdamb, Double)
+   SET_FIELD(gainholdamb, Double)
+   SET_FIELD(maxaveep, Int)
+   SET_FIELD(initrst, Int)
+   SET_FIELD(outsingle, Int)
+   SET_FIELD(syncsol, Int)
+   SET_FIELD(freqopt, Int)
+
    SET_FIELD(maxout, Int)
    SET_FIELD(minlock, Int)
    SET_FIELD(minfix, Int)
@@ -463,6 +514,22 @@ static int init_prcopt_fields_methods(JNIEnv* env, jclass clazz)
    INIT_FIELD(sateph, "I")
    INIT_FIELD(modear, "I")
    INIT_FIELD(glomodear, "I")
+
+   INIT_FIELD(gpsmodear, "I")
+   INIT_FIELD(bdsmodear, "I")
+   INIT_FIELD(arfilter, "I")
+   INIT_FIELD(minholdsats, "I")
+   INIT_FIELD(mindropsats, "I")
+   INIT_FIELD(rcvstds, "I")
+   INIT_FIELD(armaxiter, "I")
+   INIT_FIELD(varholdamb, "D")
+   INIT_FIELD(gainholdamb, "D")
+   INIT_FIELD(maxaveep, "I")
+   INIT_FIELD(initrst, "I")
+   INIT_FIELD(outsingle, "I")
+   INIT_FIELD(syncsol, "I")
+   INIT_FIELD(freqopt, "I")
+
    INIT_FIELD(maxout, "I")
    INIT_FIELD(minlock, "I")
    INIT_FIELD(minfix, "I")
