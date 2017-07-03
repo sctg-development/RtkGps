@@ -469,10 +469,10 @@ public class ProcessingOptions {
         this.mNative.bdsmodear = mode;
     }
 
-    public void setARFilter(int filter){
+    public void setArFilter(int filter){
         this.mNative.arfilter = filter;
     }
-    public int getARFilter(){
+    public int getArFilter(){
         return this.mNative.arfilter;
     }
 
@@ -483,11 +483,18 @@ public class ProcessingOptions {
         return this.mNative.minholdsats;
     }
 
-    public void setMindropToFixAmbiguity(int mindrop){
+    public void setMinDropToFixAmbiguity(int mindrop){
         this.mNative.mindropsats = mindrop;
     }
     public int getMinDropToFixAmbiguity(){
         return this.mNative.mindropsats;
+    }
+
+    public void setRcvStds(int rcvs){
+        this.mNative.rcvstds = rcvs;
+    }
+    public int getRcvStds(){
+        return this.mNative.rcvstds;
     }
 
     public void setMaxIterToFixAmbiguity(int maxiter){
@@ -497,10 +504,10 @@ public class ProcessingOptions {
         return this.mNative.armaxiter;
     }
 
-    public void setVarHoldAmbiguity(double varhold){
+    public void setVarHoldToFixAmbiguity(double varhold){
         this.mNative.varholdamb = varhold;
     }
-    public double getVarHoldAmbiguity(){
+    public double getVarHoldToFixAmbiguity(){
         return this.mNative.varholdamb;
     }
 

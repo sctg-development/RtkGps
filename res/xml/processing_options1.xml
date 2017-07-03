@@ -64,12 +64,40 @@
 			android:key="bds_ambiguity_resolution"
 			android:title="@string/procopt_ambiguity_bds_resolution_title" />
 
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_ar_filter_title"
+			android:entries="@array/procopt_ar_filter_entries"
+			android:entryValues="@array/procopt_ar_filter_values"
+			android:key="ar_filter"
+			android:title="@string/procopt_ar_filter_title" />
 
 		<EditTextPreference
-			android:defaultValue="3.0"
-			android:inputType="numberDecimal"
-			android:key="min_fix_ratio"
-			android:title="@string/procopt_min_ratio_to_fix_ambiguity_title" />
+			android:defaultValue="0"
+			android:inputType="number"
+			android:key="min_hold_sats"
+			android:title="@string/procopt_min_hold_sats_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="number"
+			android:key="min_drop_sats"
+			android:title="@string/procopt_min_drop_sats_title" />
+
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_rcv_stds_title"
+			android:entries="@array/procopt_rcv_stds_entries"
+			android:entryValues="@array/procopt_rcv_stds_values"
+			android:key="rcv_stds"
+			android:title="@string/procopt_rcv_stds_title" />
+
+	    <EditTextPreference
+	          android:inputType="numberDecimal"
+			  android:defaultValue="3.0"
+			  android:title="@string/procopt_min_ratio_to_fix_ambiguity_title"
+			  android:key="min_fix_ratio" />
 		<EditTextPreference
 			android:defaultValue="0"
 			android:inputType="number"

@@ -63,6 +63,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     public static final String KEY_GPS_AMBIGUITY_RESOLUTION ="gps_ambiguity_resolution";
     public static final String KEY_BDS_AMBIGUITY_RESOLUTION ="bds_ambiguity_resolution";
 
+    public static final String KEY_AR_FILTER ="ar_filter";
+
+    public static final String KEY_MIN_HOLD_SATS ="min_hold_sats";
+    public static final String KEY_MIN_DROP_SATS ="min_drop_sats";
+    public static final String KEY_RCV_STDS ="rcv_stds";
+
     public static final String KEY_MIN_FIX_RATIO ="min_fix_ratio";
     private static final String KEY_MIN_FIX_ELEVATION = "min_fix_elevation";
     private static final String KEY_MIN_FIX_LOCK = "min_fix_lock";
@@ -78,6 +84,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
     private ListPreference mGpsAmbiguityResolutionPref;
     private ListPreference mBDSAmbiguityResolutionPref;
+
+    private ListPreference mArFilterPref;
+
+    private EditTextPreference mMinHoldSatsPref;
+    private EditTextPreference mMinDropSatsPref;
+    private ListPreference mRcvStdsPref;
 
     private EarthTideCorrectionPreference mEarthTidesCorrPref;
     private IonosphereCorrectionPreference mIonosphereCorrectionPref;
@@ -163,6 +175,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         mBDSAmbiguityResolutionPref = (ListPreference)findPreference(KEY_BDS_AMBIGUITY_RESOLUTION);
 
+        mArFilterPref = (ListPreference)findPreference(KEY_AR_FILTER);
+
+        mMinHoldSatsPref = (EditTextPreference)findPreference(KEY_MIN_HOLD_SATS);
+        mMinDropSatsPref = (EditTextPreference)findPreference(KEY_MIN_DROP_SATS);
+        mRcvStdsPref = (ListPreference)findPreference(KEY_RCV_STDS);
 
         mMinRatioFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_RATIO);
 
@@ -194,14 +211,26 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         summary = mBDSAmbiguityResolutionPref.getEntry();
         mBDSAmbiguityResolutionPref.setSummary(summary);
 
-        summary = mMinRatioFixPref.getText();
-        mMinRatioFixPref.setSummary(summary);
+        summary = mArFilterPref.getEntry();
+        mArFilterPref.setSummary(summary);
+
+        summary = mMinHoldSatsPref.getText();
+        mMinHoldSatsPref.setSummary(summary);
+
+        summary = mMinDropSatsPref.getText();
+        mMinDropSatsPref.setSummary(summary);
+
+        summary = mRcvStdsPref.getEntry();
+        mRcvStdsPref.setSummary(summary);
 
         summary = mMinElevationFixPref.getText();
         mMinElevationFixPref.setSummary(summary);
 
         summary = mMinLockFixPref.getText();
         mMinLockFixPref.setSummary(summary);
+
+        summary = mMinRatioFixPref.getText();
+        mMinRatioFixPref.setSummary(summary);
 
         final ArrayList<String> navsys = new ArrayList<String>(10);
         final EnumSet<NavigationSystem> navsys0 = EnumSet.noneOf(NavigationSystem.class);
@@ -248,6 +277,15 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         findPreference(KEY_GPS_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
         findPreference(KEY_BDS_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
+
+        findPreference(KEY_AR_FILTER).setEnabled(rtk || ppp);
+
+        findPreference(KEY_MIN_HOLD_SATS).setEnabled(rtk || ppp);
+
+        findPreference(KEY_MIN_DROP_SATS).setEnabled(rtk || ppp);
+
+        findPreference(KEY_RCV_STDS).setEnabled(rtk || ppp);
+
 
         findPreference(KEY_MIN_FIX_ELEVATION).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_LOCK).setEnabled(rtk || ppp);
@@ -306,6 +344,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         opts.setModeGpsAR(Integer.valueOf(prefs.getString(KEY_GPS_AMBIGUITY_RESOLUTION, "0")));
         opts.setModeBDSAR(Integer.valueOf(prefs.getString(KEY_BDS_AMBIGUITY_RESOLUTION, "0")));
 
+        opts.setArFilter(Integer.valueOf(prefs.getString(KEY_AR_FILTER, "0")));
+
+        opts.setMinHoldToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_HOLD_SATS, "0")));
+        opts.setMinDropToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_DROP_SATS, "0")));
+        opts.setRcvStds(Integer.valueOf(prefs.getString(KEY_RCV_STDS, "0")));
+
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
         opts.setMinElevationToFixAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
         opts.setMinLockToFixAmbiguity(Integer.parseInt(prefs.getString(KEY_MIN_FIX_LOCK, "0")));
@@ -359,6 +403,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_GLONASS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeGAR()))
         .putString(KEY_GPS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeGpsAR()))
         .putString(KEY_BDS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeBDSAR()))
+        .putString(KEY_AR_FILTER, String.valueOf(opts.getArFilter()))
+        .putString(KEY_MIN_HOLD_SATS, String.valueOf(opts.getMinHoldToFixAmbiguity()))
+        .putString(KEY_MIN_DROP_SATS, String.valueOf(opts.getMinDropToFixAmbiguity()))
+        .putString(KEY_RCV_STDS, String.valueOf(opts.getRcvStds()))
+        .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
+        .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
         .commit()
         ;
         if (DBG) {
