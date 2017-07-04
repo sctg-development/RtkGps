@@ -327,8 +327,7 @@
         <item>Continuous</item>
         <item>Instantaneous</item>
         <item>Fix and hold</item>
-        <item>PPP</item>
-        <item>PPP (ILS)</item>
+        <item>PPP-AR</item>
     </string-array>
         <string-array name="procopt_ambiguity_resolution_values">
         <item>0</item>
@@ -336,22 +335,24 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
     </string-array>
 
-    <string name="procopt_ambiguity_glonass_resolution_title">Glonass integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_glonass_resolution_title">Glonass Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_glonass_resolution_dialog_title">Glonass Integer ambiguity resolution</string>
     <string-array name="procopt_glonass_ambiguity_resolution_entries">
         <item>Off</item>
         <item>On</item>
         <item>Auto calibrating</item>
+        <item>Ext calibrating</item>
     </string-array>
 	<string-array name="procopt_glonass_ambiguity_resolution_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
-    <string name="procopt_ambiguity_gps_resolution_title">GPS integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_gps_resolution_title">GPS Integer ambiguity resolution</string>
     <string-array name="procopt_gps_ambiguity_resolution_entries">
         <item>Off</item>
         <item>On</item>
@@ -362,7 +363,8 @@
     </string-array>
 
 
-    <string name="procopt_ambiguity_bds_resolution_title">BeiDou integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_bds_resolution_title">BeiDou Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_bds_resolution_dialog_title">BeiDou Integer ambiguity resolution</string>
     <string-array name="procopt_bds_ambiguity_resolution_entries">
         <item>Off</item>
         <item>On</item>
@@ -379,24 +381,9 @@
     <string name="procopt_min_lock_to_fix_ambiguity_title">Min lock to fix ambiguity</string>
     <string name="procopt_min_elevation_to_fix_ambiguity_title">Min elevation to fix ambiguity</string>
 
-    <!-- not yet -->
-    <string name="procopt_min_fix_to_hold_ambiguity_title">Min fix to hold ambiguity</string>
-    <string name="procopt_min_elevation_to_hold_ambiguity_title">Min elevation to hold ambiguity</string>
-    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity</string>
-    <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity</string>
-    <string name="procopt_outage_to_reset_ambiguity_title">Outage to reset ambiguity</string>
-    <string name="procopt_slip_threshold_title">Slip threshold (m)</string>
-    <string name="procopt_max_age_of_diff_s_title">Max age of diff (s)</string>
-    <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP</string>
-    <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m)</string>
-
-    <!-- rtkexplorer -->
+    <!-- implemented from rtkexplorer -->
     <string name="procopt_number_of_filter_iterations_title">Number of filter iterations</string>
     <string name="procopt_max_averaging_epochs_title">Max averaging epochs</string>
-
-    <string name="procopt_varholdamb_title">Variance fix and hold (cycle^2)</string>
-    <string name="procopt_gainholdamb_title">Gain for GLO and SBAS to adjust ambiguity</string>
-
     <string name="procopt_ar_filter_title">AR filtering to reject bad sats</string>
     <string-array name="procopt_ar_filter_entries">
         <item>Off</item>
@@ -408,26 +395,9 @@
     </string-array>
 
     <string name="procopt_min_hold_sats_title">Minimum sats to hold integer ambiguity</string>
-    <string-array name="procopt_min_hold_sats_entries">
-        <item>Off</item>
-        <item>On</item>
-    </string-array>
-	<string-array name="procopt_min_hold_sats_values">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
-
     <string name="procopt_min_drop_sats_title">Minimum sats to drop in AR</string>
-    <string-array name="procopt_min_drop_sats_entries">
-        <item>Off</item>
-        <item>On</item>
-    </string-array>
-	<string-array name="procopt_min_drop_sats_values">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
+    <string name="procopt_var_hold_amb_title">Variance fix and hold (cycle^2)</string>
+    <string name="procopt_gain_hold_amb_title">Gain for GLO and SBAS to adjust ambiguity</string>
 
     <string name="procopt_rcv_stds_title">Use Rcv Std Devs</string>
     <string-array name="procopt_rcv_stds_entries">
@@ -438,6 +408,63 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <string name="procopt_init_rst_title">Init by restart</string>
+    <string-array name="procopt_init_rst_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_init_rst_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="procopt_out_single_title">Output single solution</string>
+    <string-array name="procopt_out_single_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_out_single_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="procopt_sync_sol_title">Synchronous solution</string>
+    <string-array name="procopt_sync_sol_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_sync_sol_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="procopt_freq_opt_title">Disable L2-AR</string>
+    <string-array name="procopt_freq_opt_entries">
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+	<string-array name="procopt_freq_opt_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="procopt_min_fix_to_hold_ambiguity_title">Min fix to hold ambiguity</string>
+    <string name="procopt_min_elevation_to_hold_ambiguity_title">Min elevation to hold ambiguity</string>
+
+
+    <!-- not implemented yet all these require numerical values rather than a selection ie on/off-->
+    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity</string>
+    <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity</string>
+    <string name="procopt_outage_to_reset_ambiguity_title">Outage to reset ambiguity</string>
+    <string name="procopt_slip_threshold_title">Slip threshold (m)</string>
+    <string name="procopt_max_age_of_diff_s_title">Max age of diff (s)</string>
+    <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP</string>
+    <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m)</string>
+
+    <!-- not implemented yet from rtkexplorer -->
+
+
 
 
     <!-- Rec dynamics / Earth tides correction -->

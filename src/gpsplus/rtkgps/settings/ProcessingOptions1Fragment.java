@@ -73,8 +73,21 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     public static final String KEY_AR_MAX_ITER ="ar_max_iter";
     public static final String KEY_MAX_AVE_AMB ="max_ave_ep";
 
+    public static final String KEY_VAR_HOLD_AMB ="var_hold_amb";
+    public static final String KEY_GAIN_HOLD_AMB ="gain_hold_amb";
+
+    public static final String KEY_INIT_RST ="init_rst";
+    public static final String KEY_OUT_SINGLE ="out_single";
+    public static final String KEY_SYNC_SOL ="sync_sol";
+    public static final String KEY_FREQ_OPT ="freq_opt";
+
+
+
+
     public static final String KEY_MIN_FIX_RATIO ="min_fix_ratio";
     private static final String KEY_MIN_FIX_ELEVATION = "min_fix_elevation";
+    private static final String KEY_MIN_HOLD_ELEVATION = "min_hold_elevation";
+
     private static final String KEY_MIN_FIX_LOCK = "min_fix_lock";
 
     // Settings 1
@@ -98,6 +111,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     private EditTextPreference mArMaxIterPref;
     private EditTextPreference mMaxAveEpPref;
 
+    private EditTextPreference mVarHoldAmbPref;
+    private EditTextPreference mGainHoldAmbPref;
+
+    private ListPreference mInitRstPref;
+    private ListPreference mOutSinglePref;
+    private ListPreference mSyncSolPref;
+    private ListPreference mFreqOptPref;
+
 
     private EarthTideCorrectionPreference mEarthTidesCorrPref;
     private IonosphereCorrectionPreference mIonosphereCorrectionPref;
@@ -105,6 +126,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     private EphemerisOptionPreference mSatEphemClockPref;
     private EditTextPreference mMinRatioFixPref;
     private EditTextPreference mMinElevationFixPref;
+    private EditTextPreference mMinElevationHoldPref;
     private EditTextPreference mMinLockFixPref;
 
     private final PreferenceChangeListener mPreferenceChangeListener;
@@ -192,11 +214,22 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         mArMaxIterPref = (EditTextPreference)findPreference(KEY_AR_MAX_ITER);
         mMaxAveEpPref = (EditTextPreference)findPreference(KEY_MAX_AVE_AMB);
 
+        mVarHoldAmbPref = (EditTextPreference)findPreference(KEY_VAR_HOLD_AMB);
+        mGainHoldAmbPref = (EditTextPreference)findPreference(KEY_GAIN_HOLD_AMB);
+
+        mInitRstPref = (ListPreference)findPreference(KEY_INIT_RST);
+        mOutSinglePref = (ListPreference)findPreference(KEY_OUT_SINGLE);
+        mSyncSolPref = (ListPreference)findPreference(KEY_SYNC_SOL);
+        mFreqOptPref = (ListPreference)findPreference(KEY_FREQ_OPT);
+
+
+
         mMinRatioFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_RATIO);
 
         mMinLockFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_LOCK);
 
         mMinElevationFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_ELEVATION);
+        mMinElevationHoldPref = (EditTextPreference)findPreference(KEY_MIN_HOLD_ELEVATION);
 
     }
 
@@ -240,8 +273,27 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         summary = mMaxAveEpPref.getText();
         mMaxAveEpPref.setSummary(summary);
 
+        summary = mVarHoldAmbPref.getText();
+        mVarHoldAmbPref.setSummary(summary);
+
+        summary = mGainHoldAmbPref.getText();
+        mGainHoldAmbPref.setSummary(summary);
+
+        summary = mInitRstPref.getEntry();
+        mInitRstPref.setSummary(summary);
+        summary = mOutSinglePref.getEntry();
+        mOutSinglePref.setSummary(summary);
+        summary = mSyncSolPref.getEntry();
+        mSyncSolPref.setSummary(summary);
+        summary = mFreqOptPref.getEntry();
+        mFreqOptPref.setSummary(summary);
+
+
         summary = mMinElevationFixPref.getText();
         mMinElevationFixPref.setSummary(summary);
+
+        summary = mMinElevationHoldPref.getText();
+        mMinElevationHoldPref.setSummary(summary);
 
         summary = mMinLockFixPref.getText();
         mMinLockFixPref.setSummary(summary);
@@ -306,7 +358,16 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         findPreference(KEY_AR_MAX_ITER).setEnabled(rtk || ppp);
         findPreference(KEY_MAX_AVE_AMB).setEnabled(rtk || ppp);
 
+        findPreference(KEY_VAR_HOLD_AMB).setEnabled(rtk || ppp);
+        findPreference(KEY_GAIN_HOLD_AMB).setEnabled(rtk || ppp);
+
+        findPreference(KEY_SYNC_SOL).setEnabled(rtk || ppp);
+        findPreference(KEY_OUT_SINGLE).setEnabled(rtk || ppp);
+        findPreference(KEY_FREQ_OPT).setEnabled(rtk || ppp);
+        findPreference(KEY_INIT_RST).setEnabled(rtk || ppp);
+
         findPreference(KEY_MIN_FIX_ELEVATION).setEnabled(rtk || ppp);
+        findPreference(KEY_MIN_HOLD_ELEVATION).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_LOCK).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_RATIO).setEnabled(rtk || ppp);
     }
@@ -372,8 +433,19 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         opts.setArMaxIter(Integer.valueOf(prefs.getString(KEY_AR_MAX_ITER, "0")));
         opts.setMaxAveEp(Integer.valueOf(prefs.getString(KEY_MAX_AVE_AMB, "0")));
 
+        opts.setVarHoldAmb(Double.parseDouble(prefs.getString(KEY_VAR_HOLD_AMB, "0")));
+        opts.setGainHoldAmb(Double.parseDouble(prefs.getString(KEY_GAIN_HOLD_AMB, "0")));
+
+        opts.setInitRst(Integer.valueOf(prefs.getString(KEY_INIT_RST, "0")));
+        opts.setOutSingle(Integer.valueOf(prefs.getString(KEY_OUT_SINGLE, "0")));
+        opts.setSyncSol(Integer.valueOf(prefs.getString(KEY_SYNC_SOL, "0")));
+        opts.setFreqOpt(Integer.valueOf(prefs.getString(KEY_FREQ_OPT, "0")));
+
+
+
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
         opts.setMinElevationToFixAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
+        opts.setMinElevationToHoldAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_HOLD_ELEVATION, "0"))*(Math.PI/180));
         opts.setMinLockToFixAmbiguity(Integer.parseInt(prefs.getString(KEY_MIN_FIX_LOCK, "0")));
 
 
@@ -431,8 +503,19 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_RCV_STDS, String.valueOf(opts.getRcvStds()))
         .putString(KEY_AR_MAX_ITER, String.valueOf(opts.getArMaxIter()))
         .putString(KEY_MAX_AVE_AMB, String.valueOf(opts.getMaxAveEp()))
+        .putString(KEY_VAR_HOLD_AMB, String.valueOf(opts.getVarHoldAmb()))
+        .putString(KEY_GAIN_HOLD_AMB, String.valueOf(opts.getGainHoldAmb()))
+
+        .putString(KEY_INIT_RST, String.valueOf(opts.getInitRst()))
+        .putString(KEY_OUT_SINGLE, String.valueOf(opts.getOutSingle()))
+        .putString(KEY_SYNC_SOL, String.valueOf(opts.getSyncSol()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getFreqOpt()))
+
+
         .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
         .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
+        .putString(KEY_MIN_FIX_ELEVATION, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
+        .putString(KEY_MIN_HOLD_ELEVATION, String.valueOf(opts.getMinElevationToHoldAmbiguityRad())) /* fixme*/
         .commit()
         ;
         if (DBG) {

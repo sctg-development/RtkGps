@@ -504,17 +504,17 @@ public class ProcessingOptions {
         return this.mNative.armaxiter;
     }
 
-    public void setVarHoldToFixAmbiguity(double varhold){
+    public void setVarHoldAmb(double varhold){
         this.mNative.varholdamb = varhold;
     }
-    public double getVarHoldToFixAmbiguity(){
+    public double getVarHoldAmb(){
         return this.mNative.varholdamb;
     }
 
-    public void setGainHoldAmbiguity(double gainhold){
+    public void setGainHoldAmb(double gainhold){
         this.mNative.gainholdamb = gainhold;
     }
-    public double getGainHoldAmbiguity(){
+    public double getGainHoldAmb(){
         return this.mNative.gainholdamb;
     }
 
@@ -577,9 +577,16 @@ public class ProcessingOptions {
     public void setMinElevationToFixAmbiguityRad(double minelevation){
         this.mNative.elmaskar = minelevation;
     }
+    public double getMinElevationToHoldAmbiguityRad(){
+        return this.mNative.elmaskhold;
+    }
+    public void setMinElevationToHoldAmbiguityRad(double mineleva){
+        this.mNative.elmaskar = mineleva;
+    }
     public double getMinElevationToFixAmbiguityRad(){
         return this.mNative.elmaskar;
     }
+
     public void setMinSnrToFixAmbiguity(double minsnr){
       //  this.mNative. = minsnr;
     }

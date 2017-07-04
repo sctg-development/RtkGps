@@ -41,7 +41,7 @@
 			android:title="@string/procopt_ambiguity_resolution_title" />
 		<ListPreference
 			android:defaultValue="0"
-			android:dialogTitle="@string/procopt_ambiguity_glonass_resolution_title"
+			android:dialogTitle="@string/procopt_ambiguity_glonass_resolution_dialog_title"
 			android:entries="@array/procopt_glonass_ambiguity_resolution_entries"
 			android:entryValues="@array/procopt_glonass_ambiguity_resolution_values"
 			android:key="glonass_ambiguity_resolution"
@@ -58,7 +58,7 @@
 
 		<ListPreference
 			android:defaultValue="0"
-			android:dialogTitle="@string/procopt_ambiguity_bds_resolution_title"
+			android:dialogTitle="@string/procopt_ambiguity_bds_resolution_dialog_title"
 			android:entries="@array/procopt_bds_ambiguity_resolution_entries"
 			android:entryValues="@array/procopt_bds_ambiguity_resolution_values"
 			android:key="bds_ambiguity_resolution"
@@ -91,6 +91,18 @@
 			android:title="@string/procopt_number_of_filter_iterations_title" />
 
 		<EditTextPreference
+			android:defaultValue="0.10"
+			android:inputType="numberDecimal"
+			android:key="var_hold_amb"
+			android:title="@string/procopt_var_hold_amb_title" />
+
+		<EditTextPreference
+			android:defaultValue="0.010"
+			android:inputType="numberDecimal"
+			android:key="gain_hold_amb"
+			android:title="@string/procopt_gain_hold_amb_title" />
+
+		<EditTextPreference
 			android:defaultValue="0"
 			android:inputType="number"
 			android:key="max_ave_ep"
@@ -119,7 +131,44 @@
 			android:inputType="numberDecimal"
 			android:key="min_fix_elevation"
 			android:title="@string/procopt_min_elevation_to_fix_ambiguity_title" />
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="min_hold_elevation"
+			android:title="@string/procopt_min_elevation_to_hold_ambiguity_title" />
 
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_init_rst_title"
+			android:entries="@array/procopt_init_rst_entries"
+			android:entryValues="@array/procopt_init_rst_values"
+			android:key="init_rst"
+			android:title="@string/procopt_init_rst_title" />
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_out_single_title"
+			android:entries="@array/procopt_out_single_entries"
+			android:entryValues="@array/procopt_out_single_values"
+			android:key="out_single"
+			android:title="@string/procopt_out_single_title" />
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_sync_sol_title"
+			android:entries="@array/procopt_sync_sol_entries"
+			android:entryValues="@array/procopt_sync_sol_values"
+			android:key="sync_sol"
+			android:title="@string/procopt_sync_sol_title" />
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/procopt_freq_opt_title"
+			android:entries="@array/procopt_freq_opt_entries"
+			android:entryValues="@array/procopt_freq_opt_values"
+			android:key="freq_opt"
+			android:title="@string/procopt_freq_opt_title" />
 
 
 	</PreferenceScreen>
