@@ -497,10 +497,10 @@ public class ProcessingOptions {
         return this.mNative.rcvstds;
     }
 
-    public void setMaxIterToFixAmbiguity(int maxiter){
+    public void setArMaxIter(int maxiter){
         this.mNative.armaxiter = maxiter;
     }
-    public int getMaxIterToFixAmbiguity(){
+    public int getArMaxIter(){
         return this.mNative.armaxiter;
     }
 
@@ -518,10 +518,10 @@ public class ProcessingOptions {
         return this.mNative.gainholdamb;
     }
 
-    public void setMaxAVeep(int mveep){
+    public void setMaxAveEp(int mveep){
         this.mNative.maxaveep = mveep;
     }
-    public int getMaxAVeep(){
+    public int getMaxAveEp(){
         return this.mNative.maxaveep;
     }
 

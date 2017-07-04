@@ -391,9 +391,12 @@
     <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m)</string>
 
     <!-- rtkexplorer -->
-    <string name="procopt_number_of_filter_iteration_title">Number of filter iteration</string>
+    <string name="procopt_number_of_filter_iterations_title">Number of filter iterations</string>
+    <string name="procopt_max_averaging_epochs_title">Max averaging epochs</string>
+
     <string name="procopt_varholdamb_title">Variance fix and hold (cycle^2)</string>
     <string name="procopt_gainholdamb_title">Gain for GLO and SBAS to adjust ambiguity</string>
+
     <string name="procopt_ar_filter_title">AR filtering to reject bad sats</string>
     <string-array name="procopt_ar_filter_entries">
         <item>Off</item>

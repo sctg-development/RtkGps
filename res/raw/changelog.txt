@@ -21,8 +21,8 @@
   <body>
   $ 1.0 alpha 27
      % Build 27
-     _ 2017-07-03
-        * RTKExplorer RTKLIB Demo 5 B28 more integration
+     _ 2017-07-04
+        * More RTKExplorer RTKLIB Demo 5 B28 more integration
         * TODO Finish and test RTKLIB integer ambiguity settings Fix translations
 $ 1.0 alpha 26
    % Build 26

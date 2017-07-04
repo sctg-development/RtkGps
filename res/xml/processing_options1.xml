@@ -84,6 +84,17 @@
 			android:key="min_drop_sats"
 			android:title="@string/procopt_min_drop_sats_title" />
 
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="number"
+			android:key="ar_max_iter"
+			android:title="@string/procopt_number_of_filter_iterations_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="number"
+			android:key="max_ave_ep"
+			android:title="@string/procopt_max_averaging_epochs_title" />
 
 		<ListPreference
 			android:defaultValue="0"

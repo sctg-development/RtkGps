@@ -11,6 +11,7 @@ import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.EditText;
 
 import gpsplus.rtkgps.BuildConfig;
 import gpsplus.rtkgps.R;
@@ -69,6 +70,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     public static final String KEY_MIN_DROP_SATS ="min_drop_sats";
     public static final String KEY_RCV_STDS ="rcv_stds";
 
+    public static final String KEY_AR_MAX_ITER ="ar_max_iter";
+    public static final String KEY_MAX_AVE_AMB ="max_ave_ep";
+
     public static final String KEY_MIN_FIX_RATIO ="min_fix_ratio";
     private static final String KEY_MIN_FIX_ELEVATION = "min_fix_elevation";
     private static final String KEY_MIN_FIX_LOCK = "min_fix_lock";
@@ -90,6 +94,10 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     private EditTextPreference mMinHoldSatsPref;
     private EditTextPreference mMinDropSatsPref;
     private ListPreference mRcvStdsPref;
+
+    private EditTextPreference mArMaxIterPref;
+    private EditTextPreference mMaxAveEpPref;
+
 
     private EarthTideCorrectionPreference mEarthTidesCorrPref;
     private IonosphereCorrectionPreference mIonosphereCorrectionPref;
@@ -181,6 +189,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         mMinDropSatsPref = (EditTextPreference)findPreference(KEY_MIN_DROP_SATS);
         mRcvStdsPref = (ListPreference)findPreference(KEY_RCV_STDS);
 
+        mArMaxIterPref = (EditTextPreference)findPreference(KEY_AR_MAX_ITER);
+        mMaxAveEpPref = (EditTextPreference)findPreference(KEY_MAX_AVE_AMB);
+
         mMinRatioFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_RATIO);
 
         mMinLockFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_LOCK);
@@ -222,6 +233,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         summary = mRcvStdsPref.getEntry();
         mRcvStdsPref.setSummary(summary);
+
+        summary = mArMaxIterPref.getText();
+        mArMaxIterPref.setSummary(summary);
+
+        summary = mMaxAveEpPref.getText();
+        mMaxAveEpPref.setSummary(summary);
 
         summary = mMinElevationFixPref.getText();
         mMinElevationFixPref.setSummary(summary);
@@ -286,6 +303,8 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         findPreference(KEY_RCV_STDS).setEnabled(rtk || ppp);
 
+        findPreference(KEY_AR_MAX_ITER).setEnabled(rtk || ppp);
+        findPreference(KEY_MAX_AVE_AMB).setEnabled(rtk || ppp);
 
         findPreference(KEY_MIN_FIX_ELEVATION).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_LOCK).setEnabled(rtk || ppp);
@@ -350,6 +369,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         opts.setMinDropToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_DROP_SATS, "0")));
         opts.setRcvStds(Integer.valueOf(prefs.getString(KEY_RCV_STDS, "0")));
 
+        opts.setArMaxIter(Integer.valueOf(prefs.getString(KEY_AR_MAX_ITER, "0")));
+        opts.setMaxAveEp(Integer.valueOf(prefs.getString(KEY_MAX_AVE_AMB, "0")));
+
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
         opts.setMinElevationToFixAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
         opts.setMinLockToFixAmbiguity(Integer.parseInt(prefs.getString(KEY_MIN_FIX_LOCK, "0")));
@@ -407,6 +429,8 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_MIN_HOLD_SATS, String.valueOf(opts.getMinHoldToFixAmbiguity()))
         .putString(KEY_MIN_DROP_SATS, String.valueOf(opts.getMinDropToFixAmbiguity()))
         .putString(KEY_RCV_STDS, String.valueOf(opts.getRcvStds()))
+        .putString(KEY_AR_MAX_ITER, String.valueOf(opts.getArMaxIter()))
+        .putString(KEY_MAX_AVE_AMB, String.valueOf(opts.getMaxAveEp()))
         .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
         .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
         .commit()
