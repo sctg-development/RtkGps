@@ -1,6 +1,7 @@
 +++++++++++++ DISCLAIMER ++++++++++++++ 
-THIS IS AN ALPHA VERSION
-I received some requests to move it to a production version, from my point of view it works but this version lacks some extensive tests.
+If I (GPSFan) ever release this,
+THIS IS AN VERY ALPHA VERSION
+I (eltorio) received some requests to move it to a production version, from my point of view it works but this version lacks some extensive tests.
 However I changed it to public with this disclaimer.
 
 Also as an ALPHA version expect frequent upgrades.
@@ -10,12 +11,13 @@ WITHOUT ANY WARRANTY.
 
 Android RTKLIB frontend.
 
-source code can by downloaded on https://github.com/eltorio/RtkGps
+source code can by downloaded on https://github.com/GPSFan/RtkGps
 
-Heavily based on RtkGps from Alexey Illarionov, this is a fork of his work. He allows explicitly to modify and redistribute his work only with the distribution his copyright. You'll find the original license in the "About/Legacy Info" screen. Thanks to all contributors to respect this original license clause.
+Heavily based on RtkGps from Alexey Illarionov, Ivanskj and eltorio, this is a fork of his/their work. He allows explicitly to modify and redistribute his work only with the distribution his copyright. You'll find the original license in the "About/Legacy Info" screen. Thanks to all contributors to respect this original license clause.
 
-Since there is no new version I reworked the code for adding some features I need:
+This is a new version I/we reworked the code for adding some features I/we need:
 
+(eltorio)
 1- show the altitude in the status view.
        for activating this you need to choose Height:Geodetic in the "Solution Options" view
 2- send mock locations to other applications.
@@ -30,9 +32,15 @@ Since there is no new version I reworked the code for adding some features I nee
 8- can display some maps coming from IGN Geoportail (cadastral parcels, satellite, roads), OpenStreetMap Mapnik, Bing (satellite, roads).
 9- can download and use IGS ultra-rapid ephemeris
 
-This software is a port of RTKLIB 2.4.2p9 developed by Tomoki Takasu (http://www.rtklib.com), if you do not know what this application is; this application is probably not what you are looking for!
+(GPSFan)
+10- Integrate rtkexplorer version of RTKLIB
+11- rip out dropbox support (It's just commented out so you could add it back if you want)
+12- Add options to support rtkexplorer additional parameters
+
+
+This software is a port of RTKLIB 2.4.3 demo5 b28 developed by Tomoki Takasu (http://www.rtklib.com), enhanced by Tim Everett (rtkexplorer.com). if you do not know what this application is; this application is probably not what you are looking for!
 This application can compute precise GPS positions using RTKLIB algorithms (RTK or PPP) but for this you need a supported -external- GPS with raw carrier phase output.
-This is not a "standard" GPS like those embedded into your phone or your car, the cheapest one you can find is something like uBlox LEA-6T .
-THERE IS NO WAY to use the GPS found in Samsung Galaxy(s) nor any phone I seen.
+This is not a "standard" GPS like those embedded into your phone or your car, the cheapest one you can find is something like uBlox LEA-6T or M8T .
+There may be an issue with lower capability phones/tablets as I (GPSFan) have had some issues with a Moto E and Kindle Fire tablet. My Nexus 5X and K88 tablet work fine. btw those devices had the same problem with the original unmodified .apk.
 
 But there is a special test mode witch use the internal GPS for testing only, obviously none of the precision algorithm found in RTKLIB can be use.

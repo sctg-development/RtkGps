@@ -19,7 +19,13 @@
     </style>
   </head>
   <body>
-  $ 1.0 alpha 27
+$ 1.0 alpha 28
+     % Build 28
+     _ 2017-07-??
+        * Finished RTKExplorer RTKLIB Demo 5 B28 more integration
+        * TODO test RTKLIB integer ambiguity settings Fix translations
+$ 1.0 alpha 26
+$ 1.0 alpha 27
      % Build 27
      _ 2017-07-04
         * More RTKExplorer RTKLIB Demo 5 B28 more integration
