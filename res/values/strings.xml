@@ -260,11 +260,11 @@
     <string name="procopt_category_solution_options">Solution options</string>
 
     <!-- Positionong mode -->
-    <string name="procopt_positioning_mode_title">Positioning mode</string>
+    <string name="procopt_positioning_mode_title">Positioning mode (pos1-posmode)</string>
     <string name="procopt_positioning_mode_dialog_title">Select positioning mode</string>
 
     <!-- Number of frequencies -->
-    <string name="procopt_number_of_freqencies_title">Frequencies</string>
+    <string name="procopt_number_of_freqencies_title">Frequencies (pos1-frequency)</string>
     <string name="procopt_number_of_freqencies_dialog_title">Select number of frequencies</string>
 
     <string-array name="procopt_number_of_frequencies_entries">
@@ -279,11 +279,11 @@
     </string-array>
 
     <!-- Navigation system -->
-    <string name="procopt_navigation_system_title">Navigation system</string>
+    <string name="procopt_navigation_system_title">Navigation system (pos1-navsys)</string>
     <string name="procopt_navigation_system_dialog_title">Select navigation system</string>
 
     <!-- Elevation mask -->
-    <string name="procopt_elevation_mask_title">Elevation mask (°)</string>
+    <string name="procopt_elevation_mask_title">Elevation mask (°) (pos1-elmask)</string>
     <string name="procopt_elevation_mask_dialog_title">Select elevation mask (°)</string>
 
     <string-array name="procopt_elevation_mask_entries">
@@ -305,7 +305,7 @@
     </string-array>
 
     <!-- SNR mask -->
-    <string name="procopt_snr_mask_title">SNR mask (dbHz)</string>
+    <string name="procopt_snr_mask_title">SNR mask (dbHz) (pos1-snrmask_xx)</string>
     <string name="procopt_snr_mask_dialog_title">Select SNR mask (dbHz)</string>
 
     <string-array name="procopt_snr_entries">
@@ -320,13 +320,13 @@
         <item>40</item>
     </string-array>
     
-    <string name="procopt_ambiguity_resolution_title">GPS Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_resolution_title">GPS Integer ambiguity resolution (pos2-armode)</string>
     <string name="procopt_ambiguity_resolution_dialog_title">GPS Integer ambiguity resolution</string>
     <string-array name="procopt_ambiguity_resolution_entries">
         <item>Off</item>
         <item>Continuous</item>
         <item>Instantaneous</item>
-        <item>Fix and hold</item>
+        <item>Fix and Hold</item>
         <item>PPP-AR</item>
     </string-array>
         <string-array name="procopt_ambiguity_resolution_values">
@@ -337,13 +337,13 @@
         <item>4</item>
     </string-array>
 
-    <string name="procopt_ambiguity_glonass_resolution_title">Glonass Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_glonass_resolution_title">Glonass Integer ambiguity resolution (pos2-gloarmode)</string>
     <string name="procopt_ambiguity_glonass_resolution_dialog_title">Glonass Integer ambiguity resolution</string>
     <string-array name="procopt_glonass_ambiguity_resolution_entries">
         <item>Off</item>
         <item>On</item>
         <item>Auto calibrating</item>
-        <item>Ext calibrating</item>
+        <item>Fix and Hold</item>
     </string-array>
 	<string-array name="procopt_glonass_ambiguity_resolution_values">
         <item>0</item>
@@ -363,7 +363,7 @@
     </string-array>
 
 
-    <string name="procopt_ambiguity_bds_resolution_title">BeiDou Integer ambiguity resolution</string>
+    <string name="procopt_ambiguity_bds_resolution_title">BeiDou Integer ambiguity resolution (pos2-bdsarmode)</string>
     <string name="procopt_ambiguity_bds_resolution_dialog_title">BeiDou Integer ambiguity resolution</string>
     <string-array name="procopt_bds_ambiguity_resolution_entries">
         <item>Off</item>
@@ -377,14 +377,14 @@
     <string name="procopt_ambiguity_resolution_sub_preference_title">Integer ambiguity resolution settings</string>
 
     <!-- implemented so far -->
-    <string name="procopt_min_ratio_to_fix_ambiguity_title">Min ratio to fix ambiguity</string>
-    <string name="procopt_min_lock_to_fix_ambiguity_title">Min lock to fix ambiguity</string>
-    <string name="procopt_min_elevation_to_fix_ambiguity_title">Min elevation to fix ambiguity</string>
+    <string name="procopt_min_ratio_to_fix_ambiguity_title">Min ratio to fix ambiguity (pos2-arthres)</string>
+    <string name="procopt_min_lock_to_fix_ambiguity_title">Min lock to fix ambiguity (pos2-arlockcnt)</string>
+    <string name="procopt_min_elevation_to_fix_ambiguity_title">Min elevation to fix ambiguity (pos2-arelmask)</string>
 
     <!-- implemented from rtkexplorer -->
-    <string name="procopt_number_of_filter_iterations_title">Number of filter iterations</string>
-    <string name="procopt_max_averaging_epochs_title">Max averaging epochs</string>
-    <string name="procopt_ar_filter_title">AR filtering to reject bad sats</string>
+    <string name="procopt_number_of_filter_iterations_title">Number of filter iterations (pos2-niter)</string>
+    <string name="procopt_max_averaging_epochs_title">Max averaging epochs (ant2-maxaveep)</string>
+    <string name="procopt_ar_filter_title">AR filtering to reject bad sats (pos2-arfilter)</string>
     <string-array name="procopt_ar_filter_entries">
         <item>Off</item>
         <item>On</item>
@@ -394,12 +394,13 @@
         <item>1</item>
     </string-array>
 
-    <string name="procopt_min_hold_sats_title">Minimum sats to hold integer ambiguity</string>
-    <string name="procopt_min_drop_sats_title">Minimum sats to drop in AR</string>
-    <string name="procopt_var_hold_amb_title">Variance fix and hold (cycle^2)</string>
-    <string name="procopt_gain_hold_amb_title">Gain for GLO and SBAS to adjust ambiguity</string>
+    <string name="procopt_min_fix_sats_title">Minimum sats to fix integer ambiguity (pos2-minfixsats)</string>
+    <string name="procopt_min_hold_sats_title">Minimum sats to hold integer ambiguity (pos2-minholdsats)</string>
+    <string name="procopt_min_drop_sats_title">Minimum sats to drop in AR (pos2-mindropsats)</string>
+    <string name="procopt_var_hold_amb_title">Variance fix and hold (cycle^2) (pos2-varholdamb)</string>
+    <string name="procopt_gain_hold_amb_title">Gain for GLO and SBAS to adjust ambiguity (pos2-gainholdamb)</string>
 
-    <string name="procopt_rcv_stds_title">Use Rcv Std Devs</string>
+    <string name="procopt_rcv_stds_title">Use Rcv Std Devs (pos2-rcvstds)</string>
     <string-array name="procopt_rcv_stds_entries">
         <item>Off</item>
         <item>On</item>
@@ -409,7 +410,7 @@
         <item>1</item>
     </string-array>
 
-    <string name="procopt_init_rst_title">Init by restart</string>
+    <string name="procopt_init_rst_title">Init by restart (ant2-initrst)</string>
     <string-array name="procopt_init_rst_entries">
         <item>Off</item>
         <item>On</item>
@@ -419,7 +420,7 @@
         <item>1</item>
     </string-array>
 
-    <string name="procopt_out_single_title">Output single solution</string>
+    <string name="procopt_out_single_title">Output single solution (out-outsingle)</string>
     <string-array name="procopt_out_single_entries">
         <item>Off</item>
         <item>On</item>
@@ -429,7 +430,7 @@
         <item>1</item>
     </string-array>
 
-    <string name="procopt_sync_sol_title">Synchronous solution</string>
+    <string name="procopt_sync_sol_title">Synchronous solution (pos2-syncsol)</string>
     <string-array name="procopt_sync_sol_entries">
         <item>Off</item>
         <item>On</item>
@@ -449,18 +450,18 @@
         <item>1</item>
     </string-array>
 
-    <string name="procopt_min_fix_to_hold_ambiguity_title">Min fix to hold ambiguity</string>
-    <string name="procopt_min_elevation_to_hold_ambiguity_title">Min elevation to hold ambiguity</string>
+    <string name="procopt_min_fix_to_hold_ambiguity_title">Min fix to hold ambiguity (pos2-arminfix)</string>
+    <string name="procopt_min_elevation_to_hold_ambiguity_title">Min elevation to hold ambiguity (pos2-elmaskhold)</string>
 
 
     <!-- not implemented yet all these require numerical values rather than a selection ie on/off-->
-    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity</string>
+    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity (pos2-artthres)</string>
     <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity</string>
     <string name="procopt_outage_to_reset_ambiguity_title">Outage to reset ambiguity</string>
-    <string name="procopt_slip_threshold_title">Slip threshold (m)</string>
-    <string name="procopt_max_age_of_diff_s_title">Max age of diff (s)</string>
-    <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP</string>
-    <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m)</string>
+    <string name="procopt_slip_threshold_title">Slip threshold (m) (pos2-slipthres)</string>
+    <string name="procopt_max_age_of_diff_s_title">Max age of diff (s) (pos2-maxage)</string>
+    <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP (pos2rejdop)</string>
+    <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m) (pos2-rejionno)</string>
 
     <!-- not implemented yet from rtkexplorer -->
 
@@ -468,40 +469,40 @@
 
 
     <!-- Rec dynamics / Earth tides correction -->
-    <string name="procopt_rec_dynamics_title">Rec dynamics</string>
+    <string name="procopt_rec_dynamics_title">Rec dynamics (pos1-dynamics)</string>
     <string name="procopt_rec_dynamics_summary">Estimate receiver velocity and acceleration</string>
-    <string name="procopt_rec_earth_tides_correction_title">Earth tides correction</string>
+    <string name="procopt_rec_earth_tides_correction_title">Earth tides correction (pos1-tidecorr)</string>
 
     <!-- Ionosphere correction -->
-    <string name="procopt_ionosphere_correction_title">Ionosphere correction</string>
+    <string name="procopt_ionosphere_correction_title">Ionosphere correction (pos1-ionopt)</string>
     <string name="procopt_ionosphere_correction_dialog_title">Select ionosphere correction method</string>
 
     <!-- Troposphere correcton -->
-    <string name="procopt_troposphere_correction_title">Troposphere correction</string>
+    <string name="procopt_troposphere_correction_title">Troposphere correction (pos1-tropopt)</string>
     <string name="procopt_troposphere_correction_dialog_title">Select troposphere correction method</string>
 
     <!-- Satellite Ephemeris/Clock -->
-    <string name="procopt_satellite_ephemeris_clock_title">Satellite Ephemeris/Clock</string>
+    <string name="procopt_satellite_ephemeris_clock_title">Satellite Ephemeris/Clock (pos1-sateph)</string>
     <string name="procopt_satellite_ephemeris_clock_dialog_title">Satellite Ephemeris/Clock</string>
 
     <!-- Sat PCV -->
-    <string name="procopt_sat_antenna_pcv_title">Satellite PCV</string>
+    <string name="procopt_sat_antenna_pcv_title">Satellite PCV (pos1-posopt1)</string>
     <string name="procopt_sat_antenna_pcv_summary">Use satellite antenna phase center variation</string>
 
     <!-- Receiver PCV -->
-    <string name="procopt_receiver_antenna_pcv_title">Receiver PCV</string>
+    <string name="procopt_receiver_antenna_pcv_title">Receiver PCV (pos1-posopt2)</string>
     <string name="procopt_receiver_antenna_pcv_summary">Use receiver antenna phase center variation</string>
 
     <!-- Phase windup correction -->
-    <string name="procopt_phase_windup_correction_title">Phase windup correction</string>
+    <string name="procopt_phase_windup_correction_title">Phase windup correction (pos1-posopt3)</string>
     <string name="procopt_phase_windup_correction_summary">Apply phase windup correction</string>
 
     <!-- Exclude eclipsing sat measurements -->
-    <string name="procopt_exclude_eclipsing_sat_measurements_title">Reject eclipsing satellite</string>
+    <string name="procopt_exclude_eclipsing_sat_measurements_title">Reject eclipsing satellite (pos1-posopt4)</string>
     <string name="procopt_exclude_eclipsing_sat_measurements_summary">Exclude measurements of eclipsing satellite</string>
 
     <!-- RAIM FDE -->
-    <string name="procopt_raim_fde_title">RAIM FDE</string>
+    <string name="procopt_raim_fde_title">RAIM FDE (pos1-posopt5)</string>
     <string name="procopt_raim_fde_summary">Enable RAIM failure detection and exclusion</string>
 
     <!-- PROCESSING CYCLE -->
@@ -518,7 +519,7 @@
     </string-array>
     
     <!-- Output header -->
-    <string name="solopt_output_header_title">Output header</string>
+    <string name="solopt_output_header_title">Output header (out-outhead)</string>
     <string name="solopt_output_header_summary">Set whether the header is output or not</string>
     
     <!-- Output mocklocation -->
@@ -526,11 +527,11 @@
     <string name="solopt_output_mocklocation_summary">Set if solution is sent to other applications like the internal GPS</string>
 
     <!-- Time format -->
-    <string name="solopt_time_format_title">Time format</string>
+    <string name="solopt_time_format_title">Time format (out-timesys)</string>
     <string name="solopt_time_format_dialog_title">Set the format of time</string>
 
     <!-- Latitude/Longitude Format -->
-    <string name="solopt_lat_lon_format_title">Latitude/Longitude Format</string>
+    <string name="solopt_lat_lon_format_title">Latitude/Longitude Format (out-degform)</string>
     <string name="solopt_lat_lon_format_dialog_title">Latitude/Longitude Format</string>
 
     <!-- Earth tide correction -->
@@ -548,10 +549,10 @@
     </string-array>
 
     <!-- Field Separator -->
-    <string name="solopt_field_separator_title">Field Separator</string>
+    <string name="solopt_field_separator_title">Field Separator (out-fieldsep)</string>
 
     <!-- Height -->
-    <string name="solopt_height_title">Height</string>
+    <string name="solopt_height_title">Height (out-height)</string>
     <string name="solopt_height_dialog_title">Set the type of height</string>
 
     <string-array name="solopt_height_entries">
@@ -564,15 +565,15 @@
     </string-array>
 
     <!-- Geoid model -->
-    <string name="solopt_geoid_model_title">Geoid Model</string>
+    <string name="solopt_geoid_model_title">Geoid Model (out-geoid)</string>
     <string name="solopt_geoid_model_dialog_title">Select geoid Model</string>
 
     <!-- Nmea interval -->
-    <string name="solopt_nmea_interval_rmc_gga_title">Nmea interval (s) for RMC/GGA messages</string>
-    <string name="solopt_nmea_interval_gsa_gsv_title">Nmea interval (s) for GSA/GSV messages</string>
+    <string name="solopt_nmea_interval_rmc_gga_title">Nmea interval (s) for RMC/GGA messages (out-nmeaintv1)</string>
+    <string name="solopt_nmea_interval_gsa_gsv_title">Nmea interval (s) for GSA/GSV messages (out-nmeaintv2)</string>
 
     <!-- Output solution status -->
-    <string name="solopt_output_solution_status_title">Output solution status</string>
+    <string name="solopt_output_solution_status_title">Output solution status (out-outstat)</string>
     <string name="solopt_output_solution_status_dialog_title">Set the output level of the solution status file</string>
 
     <string-array name="solopt_output_solution_status_entries">

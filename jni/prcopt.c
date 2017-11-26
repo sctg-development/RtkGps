@@ -27,6 +27,7 @@ static struct {
    jfieldID gpsmodear;
    jfieldID bdsmodear;
    jfieldID arfilter;
+   jfieldID minfixsats;
    jfieldID minholdsats;
    jfieldID mindropsats;
    jfieldID rcvstds;
@@ -191,6 +192,7 @@ void processing_options2prcopt_t(JNIEnv* env, jobject thiz, prcopt_t *dst)
    GET_FIELD(gpsmodear, Int)
    GET_FIELD(bdsmodear, Int)
    GET_FIELD(arfilter, Int)
+   GET_FIELD(minfixsats, Int)
    GET_FIELD(minholdsats, Int)
    GET_FIELD(mindropsats, Int)
    GET_FIELD(rcvstds, Int)
@@ -353,6 +355,7 @@ static void ProcessingOptions_load_defaults(JNIEnv* env, jobject thiz)
    SET_FIELD(gpsmodear, Int)
    SET_FIELD(bdsmodear, Int)
    SET_FIELD(arfilter, Int)
+   SET_FIELD(minfixsats, Int)
    SET_FIELD(minholdsats, Int)
    SET_FIELD(mindropsats, Int)
    SET_FIELD(rcvstds, Int)
@@ -518,6 +521,7 @@ static int init_prcopt_fields_methods(JNIEnv* env, jclass clazz)
    INIT_FIELD(gpsmodear, "I")
    INIT_FIELD(bdsmodear, "I")
    INIT_FIELD(arfilter, "I")
+   INIT_FIELD(minfixsats, "I")
    INIT_FIELD(minholdsats, "I")
    INIT_FIELD(mindropsats, "I")
    INIT_FIELD(rcvstds, "I")

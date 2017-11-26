@@ -39,6 +39,7 @@
 			android:entryValues="@array/procopt_ambiguity_resolution_values"
 			android:key="ambiguity_resolution"
 			android:title="@string/procopt_ambiguity_resolution_title" />
+
 		<ListPreference
 			android:defaultValue="0"
 			android:dialogTitle="@string/procopt_ambiguity_glonass_resolution_dialog_title"
@@ -55,7 +56,6 @@
 			android:key="gps_ambiguity_resolution"
 			android:title="@string/procopt_ambiguity_gps_resolution_title" />
 
-
 		<ListPreference
 			android:defaultValue="0"
 			android:dialogTitle="@string/procopt_ambiguity_bds_resolution_dialog_title"
@@ -71,6 +71,12 @@
 			android:entryValues="@array/procopt_ar_filter_values"
 			android:key="ar_filter"
 			android:title="@string/procopt_ar_filter_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="number"
+			android:key="min_fix_sats"
+			android:title="@string/procopt_min_fix_sats_title" />
 
 		<EditTextPreference
 			android:defaultValue="0"

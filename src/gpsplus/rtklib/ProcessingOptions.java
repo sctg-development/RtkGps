@@ -118,6 +118,8 @@ public class ProcessingOptions {
 	/** AR filtering to reject bad sats (0:off,1:on)  */
 	private int arfilter;
 
+    private int minfixsats;    /* min sats to fix integer ambiguities */
+
 	private int minholdsats;    /* min sats to hold integer ambiguities */
 
 	private int mindropsats;    /* min sats to drop sats in AR */
@@ -300,6 +302,7 @@ public class ProcessingOptions {
 	mNative.gpsmodear = src.mNative.gpsmodear;
 	mNative.bdsmodear = src.mNative.bdsmodear;
 	mNative.arfilter = src.mNative.arfilter;
+    mNative.minfixsats = src.mNative.minfixsats;
 	mNative.minholdsats = src.mNative.minholdsats;
 	mNative.mindropsats = src.mNative.mindropsats;
 	mNative.rcvstds = src.mNative.rcvstds;
@@ -474,6 +477,13 @@ public class ProcessingOptions {
     }
     public int getArFilter(){
         return this.mNative.arfilter;
+    }
+
+    public void setMinFixToFixAmbiguity(int minfixsats){ // fixme
+        this.mNative.minfixsats = minfixsats;
+    }
+    public int getMinFixToFixAmbiguity(){   // fixme
+        return this.mNative.minfixsats;
     }
 
     public void setMinHoldToFixAmbiguity(int minhold){

@@ -66,6 +66,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
     public static final String KEY_AR_FILTER ="ar_filter";
 
+    public static final String KEY_MIN_FIX_SATS ="min_fix_sats";
     public static final String KEY_MIN_HOLD_SATS ="min_hold_sats";
     public static final String KEY_MIN_DROP_SATS ="min_drop_sats";
     public static final String KEY_RCV_STDS ="rcv_stds";
@@ -104,6 +105,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
     private ListPreference mArFilterPref;
 
+    private EditTextPreference mMinFixSatsPref;
     private EditTextPreference mMinHoldSatsPref;
     private EditTextPreference mMinDropSatsPref;
     private ListPreference mRcvStdsPref;
@@ -207,6 +209,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         mArFilterPref = (ListPreference)findPreference(KEY_AR_FILTER);
 
+        mMinFixSatsPref = (EditTextPreference)findPreference(KEY_MIN_FIX_SATS);
         mMinHoldSatsPref = (EditTextPreference)findPreference(KEY_MIN_HOLD_SATS);
         mMinDropSatsPref = (EditTextPreference)findPreference(KEY_MIN_DROP_SATS);
         mRcvStdsPref = (ListPreference)findPreference(KEY_RCV_STDS);
@@ -257,6 +260,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         summary = mArFilterPref.getEntry();
         mArFilterPref.setSummary(summary);
+
+        summary = mMinFixSatsPref.getText();
+        mMinFixSatsPref.setSummary(summary);
 
         summary = mMinHoldSatsPref.getText();
         mMinHoldSatsPref.setSummary(summary);
@@ -337,10 +343,10 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         findPreference(KEY_REC_DYNAMICS).setEnabled(rel);
         mEarthTidesCorrPref.setEnabled(rel || ppp);
 
-        findPreference(KEY_SAT_ANTENNA_PCV).setEnabled(rel || ppp);
-        findPreference(KEY_RECEIVER_ANTENNA_PCV).setEnabled(rel || ppp);
-        findPreference(KEY_PHASE_WINDUP_CORRECTION).setEnabled(rel || ppp);
-        findPreference(KEY_EXCLUDE_ECLIPSING).setEnabled(rel || ppp);
+        findPreference(KEY_SAT_ANTENNA_PCV).setEnabled(ppp);
+        findPreference(KEY_RECEIVER_ANTENNA_PCV).setEnabled(ppp);
+        findPreference(KEY_PHASE_WINDUP_CORRECTION).setEnabled(ppp);
+        findPreference(KEY_EXCLUDE_ECLIPSING).setEnabled(ppp);
         findPreference(KEY_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
         findPreference(KEY_GLONASS_AMBIGUITY_RESOLUTION).setEnabled(rtk || ppp);
 
@@ -349,6 +355,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         findPreference(KEY_AR_FILTER).setEnabled(rtk || ppp);
 
+        findPreference(KEY_MIN_FIX_SATS).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_HOLD_SATS).setEnabled(rtk || ppp);
 
         findPreference(KEY_MIN_DROP_SATS).setEnabled(rtk || ppp);
@@ -426,6 +433,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         opts.setArFilter(Integer.valueOf(prefs.getString(KEY_AR_FILTER, "0")));
 
+        opts.setMinFixToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_FIX_SATS, "0")));
         opts.setMinHoldToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_HOLD_SATS, "0")));
         opts.setMinDropToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_DROP_SATS, "0")));
         opts.setRcvStds(Integer.valueOf(prefs.getString(KEY_RCV_STDS, "0")));
@@ -444,8 +452,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
 
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
-        opts.setMinElevationToFixAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
-        opts.setMinElevationToHoldAmbiguityRad(Integer.parseInt(prefs.getString(KEY_MIN_HOLD_ELEVATION, "0"))*(Math.PI/180));
+
+        opts.setMinElevationToFixAmbiguityRad(Double.parseDouble(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
+        opts.setMinElevationToHoldAmbiguityRad(Double.parseDouble(prefs.getString(KEY_MIN_HOLD_ELEVATION, "0"))*(Math.PI/180));
         opts.setMinLockToFixAmbiguity(Integer.parseInt(prefs.getString(KEY_MIN_FIX_LOCK, "0")));
 
 
@@ -498,6 +507,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_GPS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeGpsAR()))
         .putString(KEY_BDS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeBDSAR()))
         .putString(KEY_AR_FILTER, String.valueOf(opts.getArFilter()))
+        .putString(KEY_MIN_FIX_SATS, String.valueOf(opts.getMinFixToFixAmbiguity()))
         .putString(KEY_MIN_HOLD_SATS, String.valueOf(opts.getMinHoldToFixAmbiguity()))
         .putString(KEY_MIN_DROP_SATS, String.valueOf(opts.getMinDropToFixAmbiguity()))
         .putString(KEY_RCV_STDS, String.valueOf(opts.getRcvStds()))
@@ -514,8 +524,8 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
         .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
-        .putString(KEY_MIN_FIX_ELEVATION, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
-        .putString(KEY_MIN_HOLD_ELEVATION, String.valueOf(opts.getMinElevationToHoldAmbiguityRad())) /* fixme*/
+        .putString(KEY_MIN_FIX_ELEVATION, String.valueOf(opts.getMinElevationToFixAmbiguityRad()))
+        .putString(KEY_MIN_HOLD_ELEVATION, String.valueOf(opts.getMinElevationToHoldAmbiguityRad()))
         .commit()
         ;
         if (DBG) {

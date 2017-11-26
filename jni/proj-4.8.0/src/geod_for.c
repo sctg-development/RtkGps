@@ -91,13 +91,15 @@ geod_for(void) {
 			(ellipse ? onef * M : M));
 		de = atan2(sinds * sina12 ,
 			(costh1 * cosds - sinth1 * sinds * cosa12));
-		if (ellipse)
-			if (signS)
+		if (ellipse) {
+			if (signS) {
 				de += c1 * ((1. - c2) * ds +
-					c2 * sinds * cos(ss));
-			else
+							c2 * sinds * cos(ss));
+			}else{
 				de -= c1 * ((1. - c2) * ds -
-					c2 * sinds * cos(ss));
+							c2 * sinds * cos(ss));
+			}
+		}
 	}
 	lam2 = adjlon( lam1 + de );
 }

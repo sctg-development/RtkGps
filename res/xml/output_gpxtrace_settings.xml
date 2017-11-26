@@ -11,10 +11,4 @@
         android:defaultValue="gpxtrace.gpx"
         android:dependency="enable"
         />
-    <CheckBoxPreference
-		android:key="syncdropbox"
-		android:title="@string/file_syncdropbox_title"
-		android:summary="@string/file_syncdropbox_summary"
-		android:dependency="enable"
-        />
 </PreferenceScreen>

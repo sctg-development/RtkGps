@@ -3,21 +3,21 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" >
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
 
-    	<fragment
-        	android:id="@+id/settings1Fragment"
-        	class="gpsplus.rtkgps.settings.ProcessingOptions1Fragment"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" />
-    
-    	<fragment
-        	android:id="@+id/solutionOutputFragment"
-        	class="gpsplus.rtkgps.settings.SolutionOutputSettingsFragment"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content" />
-    </LinearLayout>
+		<fragment
+			android:id="@+id/settings1Fragment"
+			class="gpsplus.rtkgps.settings.ProcessingOptions1Fragment"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<fragment
+			android:id="@+id/solutionOutputFragment"
+			class="gpsplus.rtkgps.settings.SolutionOutputSettingsFragment"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
     
 </ScrollView>
