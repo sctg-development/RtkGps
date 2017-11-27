@@ -2,3 +2,4 @@
 	path = jni/RTKLIB
 	url = https://github.com/rtklibexplorer/RTKLIB.git
 	branch = demo5
+	ignore = dirty
