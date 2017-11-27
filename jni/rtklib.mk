@@ -72,6 +72,7 @@ LOCAL_SRC_FILES += \
     $(RTKLIB_PATH)/src/rcv/septentrio.c \
     $(RTKLIB_PATH)/src/rcv/skytraq.c \
     $(RTKLIB_PATH)/src/rcv/ss2.c \
+    $(RTKLIB_PATH)/src/rcv/swiftnav.c \
     $(RTKLIB_PATH)/src/rcv/ublox.c \
     $(RTKLIB_PATH)/src/rcv/cmr.c \
     $(RTKLIB_PATH)/src/rcv/tersus.c

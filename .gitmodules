@@ -1,6 +1,4 @@
-[submodule "jni/simonlynen_android_libs"]
-	path = jni/simonlynen_android_libs
-	url = git://github.com/simonlynen/android_libs.git
 [submodule "jni/RTKLIB"]
 	path = jni/RTKLIB
-	url = https://github.com/ausioz/RTKLIB.git
+	url = https://github.com/rtklibexplorer/RTKLIB.git
+	branch = demo5

@@ -19,6 +19,12 @@
     </style>
   </head>
   <body>
+$ 1.0 alpha 30
+     % Build 30
+     _ 2017-11-27
+        * Move to rtklibxplorer RTKLIB Demo 5 B29a code
+        * TODO test RTKLIB integer ambiguity settings Fix translations,
+        * add remaining prcopt and solopt settings
 $ 1.0 alpha 29
      % Build 29
      _ 2017-11-26
