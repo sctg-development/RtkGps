@@ -18,6 +18,8 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.Settings;
+import	android.app.Notification.Builder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -477,18 +479,21 @@ public class RtkNaviService extends IntentService implements LocationListener
     private Notification createForegroundNotification() {
         CharSequence text = getText(R.string.local_service_started);
 
-        Notification notification = new Notification(R.drawable.ic_launcher,
-                text, System.currentTimeMillis());
-
         // The PendingIntent to launch our activity if the user selects this
         // notification
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
 
-        notification.setLatestEventInfo(this,
-                getText(R.string.local_service_label), text, contentIntent);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setContentTitle(getText(R.string.local_service_label));
+        builder.setContentText(text);
+        builder.setContentIntent(contentIntent);
+        builder.setSmallIcon(R.drawable.ic_launcher);
+        builder.setOngoing(true);
+        builder.setNumber(100);
+        builder.setAutoCancel(false);
 
-        return notification;
+        return builder.build();
     }
 
     private class BluetoothCallbacks implements BluetoothToRtklib.Callbacks {
