@@ -39,7 +39,7 @@ public abstract class RtklibLocalSocketThread extends Thread {
 
     public RtklibLocalSocketThread(String socketPath) {
         mSocketPath = new LocalSocketAddress(socketPath, Namespace.FILESYSTEM);
-
+        Log.i(TAG, "Socket Path " + mSocketPath + " " + socketPath);
         mInputStream = DummyInputStream.instance;
         mOutputStream = DummyOutputStream.instance;
         mReconnectTimeout = RECONNECT_TIMEOUT_MS;
@@ -142,16 +142,18 @@ public abstract class RtklibLocalSocketThread extends Thread {
     }
 
     private boolean connectLoop() {
-        LocalSocket s = new LocalSocket();
+            LocalSocket s = new LocalSocket();
+
         if (!TextUtils.isEmpty(mBindpoint)) {
             try {
                 s.bind(new LocalSocketAddress(mBindpoint));
+
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
 
-        while(!cancelRequested) {
+       while(!cancelRequested) {
             try {
                 s.connect(mSocketPath);
                 synchronized(this) {
@@ -178,6 +180,7 @@ public abstract class RtklibLocalSocketThread extends Thread {
             }
         }
         return false;
+
     }
 
     private boolean transferDataLoop() {

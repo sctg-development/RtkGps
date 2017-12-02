@@ -17,19 +17,13 @@ repositories {
 }
 
 dependencies {
-    compile ('com.google.android.gms:play-services:6.5.87'){
-        exclude module: 'support-v4'
-//        exclude module: 'support-annotation'
-//        exclude module: "support-core-ui"
-    }
+    compile 'com.google.gms:google-services:3.1.0'
+    compile ('com.google.android.gms:play-services-gcm:11.0.4') {
+        exclude group: 'com.android.support', module: 'support-v4' }
     compile ('com.google.code.findbugs:jsr305:3.0.2'){
- //       exclude module: 'support-v4'
-    }
+        exclude group: 'com.android.support', module: 'support-v4'}
     compile ('com.jakewharton:butterknife:6.1.0'){
-//        exclude module: 'support-v4'
-//        exclude module: 'support-annotation'
-//        exclude module: "support-core-ui"
-    }
+        exclude group: 'com.android.support', module: 'support-v4'}
     compile fileTree(include: ['*.jar'], dir: 'libs')
 }
 
@@ -58,7 +52,7 @@ android {
             jniLibs.srcDir 'libs'
         }
 
-        //       instrumentTest.setRoot('tests')
+               instrumentTest.setRoot('tests')
     }
     externalNativeBuild {
         ndkBuild {

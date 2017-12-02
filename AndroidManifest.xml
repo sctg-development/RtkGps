@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gpsplus.rtkgps"
-    android:versionCode="30"
-    android:versionName="1.0 alpha 30" >
+    android:versionCode="31"
+    android:versionName="1.0 alpha 31" >
 
     <uses-sdk
         android:minSdkVersion="18"
@@ -29,7 +29,9 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    
+
+
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -55,7 +57,9 @@
                       android:resource="@xml/usb_device_filter" />
         </activity>
 
-        <activity android:name=".settings.SettingsActivity" />
+		<activity android:name=".settings.SettingsActivity"
+			android:parentActivityName="gpsplus.rtkgps.MainActivity" >
+		</activity>
 
         <activity
             android:name=".settings.StreamSettingsActivity"

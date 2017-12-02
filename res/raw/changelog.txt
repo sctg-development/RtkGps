@@ -19,6 +19,14 @@
     </style>
   </head>
   <body>
+$ 1.0 alpha 31
+     % Build 31
+     _ 2017-12-1
+        * Patch RTKLIB Demo 5 B29a code to add unixsvr socket support
+        * u-blox via Bluetooth working, as is via USB
+        * TODO: test RTKLIB integer ambiguity settings
+        *   Fix translations,
+        *   add remaining prcopt and solopt settings
 $ 1.0 alpha 30
      % Build 30
      _ 2017-11-27

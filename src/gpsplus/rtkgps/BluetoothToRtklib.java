@@ -226,7 +226,6 @@ public class BluetoothToRtklib {
 
         private void connectLoop() throws CancelRequestedException {
             while(true) {
-                Log.i(TAG, "Bluetooth connect loop");
                 try {
                     connect();
                     return;
