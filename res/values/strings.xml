@@ -455,17 +455,22 @@
 
 
     <!-- not implemented yet all these require numerical values rather than a selection ie on/off-->
-    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity (pos2-artthres)</string>
-    <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity</string>
-    <string name="procopt_outage_to_reset_ambiguity_title">Outage to reset ambiguity</string>
+
+    <string name="procopt_outage_to_reset_ambiguity_title">Outage to reset ambiguity (pos2-aroutcnt)</string>
+
     <string name="procopt_slip_threshold_title">Slip threshold (m) (pos2-slipthres)</string>
+
     <string name="procopt_max_age_of_diff_s_title">Max age of diff (s) (pos2-maxage)</string>
-    <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP (pos2rejdop)</string>
+
+    <string name="procopt_reject_threshold_of_gdop_title">Reject threshold of GDOP (pos2-rejgdop)</string>
+
     <string name="procopt_reject_threshold_of_innov_title">Reject threshold of innov (m) (pos2-rejionno)</string>
+
 
     <!-- not implemented yet from rtkexplorer -->
 
-
+    <string name="procopt_min_confidence_to_fix_ambiguity_title">Min confidence to fix ambiguity (??)</string>
+    <string name="procopt_max_fcb_to_fix_ambiguity_title">Max FCB to fix ambiguity (??)</string>
 
 
     <!-- Rec dynamics / Earth tides correction -->

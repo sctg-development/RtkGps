@@ -82,7 +82,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     public static final String KEY_SYNC_SOL ="sync_sol";
     public static final String KEY_FREQ_OPT ="freq_opt";
 
-
+    public static final String KEY_AR_OUT_CNT ="ar_out_cnt";
+    public static final String KEY_SLIP_THRES ="slip_thres";
+    public static final String KEY_MAX_AGE ="max_age";
+    public static final String KEY_REJ_GDOP ="rej_gdop";
+    public static final String KEY_REJ_IONNO ="rej_ionno";
 
 
     public static final String KEY_MIN_FIX_RATIO ="min_fix_ratio";
@@ -121,6 +125,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     private ListPreference mSyncSolPref;
     private ListPreference mFreqOptPref;
 
+    private EditTextPreference mArOutCntPref;
+    private EditTextPreference mMaxAgePref;
+    private EditTextPreference mSlipThreshPref;
+    private EditTextPreference mRejGDopPref;
+    private EditTextPreference mRejIonnoPref;
 
     private EarthTideCorrectionPreference mEarthTidesCorrPref;
     private IonosphereCorrectionPreference mIonosphereCorrectionPref;
@@ -225,7 +234,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         mSyncSolPref = (ListPreference)findPreference(KEY_SYNC_SOL);
         mFreqOptPref = (ListPreference)findPreference(KEY_FREQ_OPT);
 
-
+        mArOutCntPref = (EditTextPreference)findPreference(KEY_AR_OUT_CNT);
+        mSlipThreshPref = (EditTextPreference)findPreference(KEY_SLIP_THRES);
+        mMaxAgePref = (EditTextPreference)findPreference(KEY_MAX_AGE);
+        mRejGDopPref = (EditTextPreference)findPreference(KEY_REJ_GDOP);
+        mRejIonnoPref = (EditTextPreference)findPreference(KEY_REJ_IONNO);
 
         mMinRatioFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_RATIO);
 
@@ -293,6 +306,17 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         mSyncSolPref.setSummary(summary);
         summary = mFreqOptPref.getEntry();
         mFreqOptPref.setSummary(summary);
+
+        summary = mArOutCntPref.getText();
+        mArOutCntPref.setSummary(summary);
+        summary = mMaxAgePref.getText();
+        mMaxAgePref.setSummary(summary);
+        summary = mSlipThreshPref.getText();
+        mSlipThreshPref.setSummary(summary);
+        summary = mRejGDopPref.getText();
+        mRejGDopPref.setSummary(summary);
+        summary = mRejIonnoPref.getText();
+        mRejIonnoPref.setSummary(summary);
 
 
         summary = mMinElevationFixPref.getText();
@@ -377,6 +401,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         findPreference(KEY_MIN_HOLD_ELEVATION).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_LOCK).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_RATIO).setEnabled(rtk || ppp);
+
+
+
     }
 
     public static ProcessingOptions readPrefs(Context ctx) {
@@ -449,6 +476,12 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         opts.setSyncSol(Integer.valueOf(prefs.getString(KEY_SYNC_SOL, "0")));
         opts.setFreqOpt(Integer.valueOf(prefs.getString(KEY_FREQ_OPT, "0")));
 
+        opts.setArOutCnt(Integer.valueOf(prefs.getString(KEY_AR_OUT_CNT, "0")));
+
+        opts.setSlipThres(Double.parseDouble(prefs.getString(KEY_SLIP_THRES, "0")));
+        opts.setMaxAge(Double.parseDouble(prefs.getString(KEY_MAX_AGE, "0")));
+        opts.setRejGDop(Double.parseDouble(prefs.getString(KEY_REJ_GDOP, "0")));
+        opts.setRejIonno(Double.parseDouble(prefs.getString(KEY_REJ_IONNO, "0")));
 
 
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
@@ -520,7 +553,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_OUT_SINGLE, String.valueOf(opts.getOutSingle()))
         .putString(KEY_SYNC_SOL, String.valueOf(opts.getSyncSol()))
         .putString(KEY_FREQ_OPT, String.valueOf(opts.getFreqOpt()))
-
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getArOutCnt()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getSlipThres()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getMaxAge()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getRejGDop()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getRejIonno()))
 
         .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
         .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/

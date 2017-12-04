@@ -142,6 +142,7 @@ public class ProcessingOptions {
 
 	private int freqopt;        /* disable L2-AR */
 
+
         /** obs outage count to reset bias */
         private int maxout;
 
@@ -563,6 +564,40 @@ public class ProcessingOptions {
         return this.mNative.freqopt;
     }
 
+    public void setArOutCnt(int cnt){
+        this.mNative.maxout = cnt;
+    }
+    public int getArOutCnt(){
+        return this.mNative.maxout;
+    }
+
+    public void setSlipThres(double slip){
+        this.mNative.thresslip = slip;
+    }
+    public double getSlipThres(){
+        return this.mNative.thresslip;
+    }
+
+    public void setMaxAge(double age){
+        this.mNative.maxtdiff = age;
+    }
+    public double getMaxAge(){
+        return this.mNative.maxtdiff;
+    }
+
+    public void setRejGDop(double rdop){
+        this.mNative.maxgdop = rdop;
+    }
+    public double getRejGDop(){
+        return this.mNative.maxgdop;
+    }
+
+    public void setRejIonno(double ion){
+        this.mNative.maxinno = ion;
+    }
+    public double getRejIonno(){
+        return this.mNative.maxinno;
+    }
 
     /**
      * set the Min ratio to fix ambiguity

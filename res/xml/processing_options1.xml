@@ -176,6 +176,36 @@
 			android:key="freq_opt"
 			android:title="@string/procopt_freq_opt_title" />
 
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="ar_out_cnt"
+			android:title="@string/procopt_outage_to_reset_ambiguity_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="slip_thres"
+			android:title="@string/procopt_slip_threshold_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="max_age"
+			android:title="@string/procopt_max_age_of_diff_s_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="rej_gdop"
+			android:title="@string/procopt_reject_threshold_of_gdop_title" />
+
+		<EditTextPreference
+			android:defaultValue="0"
+			android:inputType="numberDecimal"
+			android:key="rej_ionno"
+			android:title="@string/procopt_reject_threshold_of_innov_title" />
+
 
 	</PreferenceScreen>
 
