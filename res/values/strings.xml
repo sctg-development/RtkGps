@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">RTKGPS+</string>
+    <string name="app_name">RTKGPS+ extended</string>
     <string name="app_url">http://github.com/GPSFan/RtkGps</string>
     <string name="app_version_label">Version</string>
     <string name="app_legacy_info_label">Legacy info</string>

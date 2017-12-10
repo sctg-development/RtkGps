@@ -19,6 +19,14 @@
     </style>
   </head>
   <body>
+$ 1.0 Beta 2
+     % Build 33
+     _ 2017-12-10
+        *   Updated LICENSE.txt & README.md
+        * TODO: test RTKLIB integer ambiguity settings
+        *   Fix translations, and solopt settings
+        *   maybe re-order settings to resemble rtknavi
+        *   fix visibility of settings
 $ 1.0 alpha 32
      % Build 32
      _ 2017-12-3
