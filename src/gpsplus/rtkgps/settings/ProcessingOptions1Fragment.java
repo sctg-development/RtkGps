@@ -66,12 +66,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
     public static final String KEY_AR_FILTER ="ar_filter";
 
+    public static final String KEY_AR_MIN_FIX ="ar_min_fix";
     public static final String KEY_MIN_FIX_SATS ="min_fix_sats";
     public static final String KEY_MIN_HOLD_SATS ="min_hold_sats";
     public static final String KEY_MIN_DROP_SATS ="min_drop_sats";
     public static final String KEY_RCV_STDS ="rcv_stds";
 
     public static final String KEY_AR_MAX_ITER ="ar_max_iter";
+    public static final String KEY_N_ITER ="n_iter";
     public static final String KEY_MAX_AVE_AMB ="max_ave_ep";
 
     public static final String KEY_VAR_HOLD_AMB ="var_hold_amb";
@@ -90,12 +92,13 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
 
     public static final String KEY_MIN_FIX_RATIO ="min_fix_ratio";
+    public static final String KEY_MAX_POS_VAR ="max_pos_var";
     private static final String KEY_MIN_FIX_ELEVATION = "min_fix_elevation";
     private static final String KEY_MIN_HOLD_ELEVATION = "min_hold_elevation";
 
     private static final String KEY_MIN_FIX_LOCK = "min_fix_lock";
 
-    // Settings 1
+    // Settings
     private PositioningModePreference mPositioningModePref;
     private ListPreference mNumberOfFrequenciesPref;
     private MultiSelectListPreferenceWorkaround mNavigationSystem;
@@ -109,12 +112,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
     private ListPreference mArFilterPref;
 
+    private EditTextPreference mArMinFixPref;
     private EditTextPreference mMinFixSatsPref;
     private EditTextPreference mMinHoldSatsPref;
     private EditTextPreference mMinDropSatsPref;
     private ListPreference mRcvStdsPref;
 
     private EditTextPreference mArMaxIterPref;
+    private EditTextPreference mNIterPref;
     private EditTextPreference mMaxAveEpPref;
 
     private EditTextPreference mVarHoldAmbPref;
@@ -136,6 +141,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
     private TroposphereCorrectionPreference mTroposphereCorrectionPref;
     private EphemerisOptionPreference mSatEphemClockPref;
     private EditTextPreference mMinRatioFixPref;
+    private EditTextPreference mMaxPosVarPref;
     private EditTextPreference mMinElevationFixPref;
     private EditTextPreference mMinElevationHoldPref;
     private EditTextPreference mMinLockFixPref;
@@ -218,12 +224,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         mArFilterPref = (ListPreference)findPreference(KEY_AR_FILTER);
 
+        mArMinFixPref = (EditTextPreference)findPreference(KEY_AR_MIN_FIX);
         mMinFixSatsPref = (EditTextPreference)findPreference(KEY_MIN_FIX_SATS);
         mMinHoldSatsPref = (EditTextPreference)findPreference(KEY_MIN_HOLD_SATS);
         mMinDropSatsPref = (EditTextPreference)findPreference(KEY_MIN_DROP_SATS);
         mRcvStdsPref = (ListPreference)findPreference(KEY_RCV_STDS);
 
         mArMaxIterPref = (EditTextPreference)findPreference(KEY_AR_MAX_ITER);
+        mNIterPref = (EditTextPreference)findPreference(KEY_N_ITER);
         mMaxAveEpPref = (EditTextPreference)findPreference(KEY_MAX_AVE_AMB);
 
         mVarHoldAmbPref = (EditTextPreference)findPreference(KEY_VAR_HOLD_AMB);
@@ -241,7 +249,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         mRejIonnoPref = (EditTextPreference)findPreference(KEY_REJ_IONNO);
 
         mMinRatioFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_RATIO);
-
+        mMaxPosVarPref = (EditTextPreference)findPreference(KEY_MAX_POS_VAR);
         mMinLockFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_LOCK);
 
         mMinElevationFixPref = (EditTextPreference)findPreference(KEY_MIN_FIX_ELEVATION);
@@ -274,6 +282,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         summary = mArFilterPref.getEntry();
         mArFilterPref.setSummary(summary);
 
+        summary = mArMinFixPref.getText();
+        mArMinFixPref.setSummary(summary);
+
         summary = mMinFixSatsPref.getText();
         mMinFixSatsPref.setSummary(summary);
 
@@ -288,6 +299,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         summary = mArMaxIterPref.getText();
         mArMaxIterPref.setSummary(summary);
+
+        summary = mNIterPref.getText();
+        mNIterPref.setSummary(summary);
 
         summary = mMaxAveEpPref.getText();
         mMaxAveEpPref.setSummary(summary);
@@ -331,6 +345,9 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         summary = mMinRatioFixPref.getText();
         mMinRatioFixPref.setSummary(summary);
 
+        summary = mMaxPosVarPref.getText();
+        mMaxPosVarPref.setSummary(summary);
+
         final ArrayList<String> navsys = new ArrayList<String>(10);
         final EnumSet<NavigationSystem> navsys0 = EnumSet.noneOf(NavigationSystem.class);
         // sort
@@ -355,13 +372,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
     private void updateEnable() {
         PositioningMode posMode;
-        final boolean rel, ppp, rtk;
+        final boolean moveb, rel, ppp, rtk;
 
         posMode = PositioningMode.valueOf(mPositioningModePref.getValue());
 
         rel = posMode.isRelative();
         rtk = posMode.isRtk();
         ppp = posMode.isPpp();
+        moveb = posMode.isMoveB();
 
         mNumberOfFrequenciesPref.setEnabled(rel);
         findPreference(KEY_REC_DYNAMICS).setEnabled(rel);
@@ -379,6 +397,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         findPreference(KEY_AR_FILTER).setEnabled(rtk || ppp);
 
+        findPreference(KEY_AR_MIN_FIX).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_SATS).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_HOLD_SATS).setEnabled(rtk || ppp);
 
@@ -387,6 +406,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         findPreference(KEY_RCV_STDS).setEnabled(rtk || ppp);
 
         findPreference(KEY_AR_MAX_ITER).setEnabled(rtk || ppp);
+        findPreference(KEY_N_ITER).setEnabled(rtk || ppp);
         findPreference(KEY_MAX_AVE_AMB).setEnabled(rtk || ppp);
 
         findPreference(KEY_VAR_HOLD_AMB).setEnabled(rtk || ppp);
@@ -401,7 +421,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         findPreference(KEY_MIN_HOLD_ELEVATION).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_LOCK).setEnabled(rtk || ppp);
         findPreference(KEY_MIN_FIX_RATIO).setEnabled(rtk || ppp);
-
+        findPreference(KEY_MAX_POS_VAR).setEnabled(rtk || ppp);
 
 
     }
@@ -460,12 +480,14 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         opts.setArFilter(Integer.valueOf(prefs.getString(KEY_AR_FILTER, "0")));
 
+        opts.setMinFixCountToHoldAmbiguity(Integer.valueOf(prefs.getString(KEY_AR_MIN_FIX, "0")));
         opts.setMinFixToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_FIX_SATS, "0")));
         opts.setMinHoldToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_HOLD_SATS, "0")));
         opts.setMinDropToFixAmbiguity(Integer.valueOf(prefs.getString(KEY_MIN_DROP_SATS, "0")));
         opts.setRcvStds(Integer.valueOf(prefs.getString(KEY_RCV_STDS, "0")));
 
         opts.setArMaxIter(Integer.valueOf(prefs.getString(KEY_AR_MAX_ITER, "0")));
+        opts.setNIter(Integer.valueOf(prefs.getString(KEY_N_ITER, "0")));
         opts.setMaxAveEp(Integer.valueOf(prefs.getString(KEY_MAX_AVE_AMB, "0")));
 
         opts.setVarHoldAmb(Double.parseDouble(prefs.getString(KEY_VAR_HOLD_AMB, "0")));
@@ -485,6 +507,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
 
         opts.setValidThresoldAR(Double.parseDouble(prefs.getString(KEY_MIN_FIX_RATIO, "3.0")));
+        opts.setMaxPositionVariance(Double.parseDouble(prefs.getString(KEY_MAX_POS_VAR, "0.004")));
 
         opts.setMinElevationToFixAmbiguityRad(Double.parseDouble(prefs.getString(KEY_MIN_FIX_ELEVATION, "0"))*(Math.PI/180));
         opts.setMinElevationToHoldAmbiguityRad(Double.parseDouble(prefs.getString(KEY_MIN_HOLD_ELEVATION, "0"))*(Math.PI/180));
@@ -540,11 +563,13 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_GPS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeGpsAR()))
         .putString(KEY_BDS_AMBIGUITY_RESOLUTION, String.valueOf(opts.getModeBDSAR()))
         .putString(KEY_AR_FILTER, String.valueOf(opts.getArFilter()))
+        .putString(KEY_AR_MIN_FIX, String.valueOf(opts.getMinFixCountToHoldAmbiguity()))
         .putString(KEY_MIN_FIX_SATS, String.valueOf(opts.getMinFixToFixAmbiguity()))
         .putString(KEY_MIN_HOLD_SATS, String.valueOf(opts.getMinHoldToFixAmbiguity()))
         .putString(KEY_MIN_DROP_SATS, String.valueOf(opts.getMinDropToFixAmbiguity()))
         .putString(KEY_RCV_STDS, String.valueOf(opts.getRcvStds()))
         .putString(KEY_AR_MAX_ITER, String.valueOf(opts.getArMaxIter()))
+        .putString(KEY_N_ITER, String.valueOf(opts.getNIter()))
         .putString(KEY_MAX_AVE_AMB, String.valueOf(opts.getMaxAveEp()))
         .putString(KEY_VAR_HOLD_AMB, String.valueOf(opts.getVarHoldAmb()))
         .putString(KEY_GAIN_HOLD_AMB, String.valueOf(opts.getGainHoldAmb()))
@@ -561,6 +586,7 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
 
         .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
         .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
+        .putString(KEY_MAX_POS_VAR, String.valueOf(opts.getMaxPositionVariance()))
         .putString(KEY_MIN_FIX_ELEVATION, String.valueOf(opts.getMinElevationToFixAmbiguityRad()))
         .putString(KEY_MIN_HOLD_ELEVATION, String.valueOf(opts.getMinElevationToHoldAmbiguityRad()))
         .commit()

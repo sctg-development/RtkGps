@@ -480,7 +480,14 @@ public class ProcessingOptions {
         return this.mNative.arfilter;
     }
 
-    public void setMinFixToFixAmbiguity(int minfixsats){ // fixme
+    public void setMinFixCountToHoldAmbiguity(int arminfix){
+        this.mNative.minfix = arminfix;
+    }
+    public int getMinFixCountToHoldAmbiguity(){
+        return this.mNative.minfix;
+    }
+
+    public void setMinFixToFixAmbiguity(int minfixsats){
         this.mNative.minfixsats = minfixsats;
     }
     public int getMinFixToFixAmbiguity(){   // fixme
@@ -508,11 +515,18 @@ public class ProcessingOptions {
         return this.mNative.rcvstds;
     }
 
-    public void setArMaxIter(int maxiter){
-        this.mNative.armaxiter = maxiter;
+    public void setArMaxIter(int armaxiter){
+        this.mNative.armaxiter = armaxiter;
     }
     public int getArMaxIter(){
         return this.mNative.armaxiter;
+    }
+
+    public void setNIter(int niter){
+        this.mNative.niter = niter;
+    }
+    public int getNIter(){
+        return this.mNative.niter;
     }
 
     public void setVarHoldAmb(double varhold){
@@ -606,6 +620,14 @@ public class ProcessingOptions {
     public void setValidThresoldAR(double thres){
         this.mNative.thresar_0 = thres;
     }
+
+    /**
+     * set the Max Position Variance
+     * @param thres ratio getMaxPositionVariance
+     */
+    public void setMaxPositionVariance(double thres){
+        this.mNative.thresar_1 = thres;
+    }
     /**
      * get min ratio to fix ambiguity
      * @return
@@ -613,6 +635,10 @@ public class ProcessingOptions {
     public double getValidThresoldAR(){
         return this.mNative.thresar_0;
     }
+    public double getMaxPositionVariance() {
+        return this.mNative.thresar_1;
+    }
+
     public void setMinLockToFixAmbiguity(int minlock){
         this.mNative.minlock = minlock;
     }

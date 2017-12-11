@@ -134,6 +134,7 @@
     <string name="pmode_dgps">DGPS/DGNSS</string>
     <string name="pmode_kinema">Kinematic</string>
     <string name="pmode_static">Static</string>
+    <string name="pmode_statstart">Static — Start</string>
     <string name="pmode_moveb">Moving — base</string>
     <string name="pmode_fixed">Fixed</string>
     <string name="pmode_ppp_kinema">PPP — Kinematic</string>
@@ -271,6 +272,7 @@
         <item>L1</item>
         <item>L1 + L2</item>
         <item>L1 + L2 + L5</item>
+        <item>L1 + L5</item>
     </string-array>
     <string-array name="procopt_number_of_frequencies_values">
         <item>1</item>
@@ -382,6 +384,8 @@
     <string name="procopt_min_elevation_to_fix_ambiguity_title">Min elevation to fix ambiguity (pos2-arelmask)</string>
 
     <!-- implemented from rtkexplorer -->
+    <string name="procopt_max_pos_var_ambiguity_title">Max Pos Var to fix ambiguity (pos2-arthres1)</string>
+    <string name="procopt_number_of_ar_iterations_title">Max Number AR iterations (pos2-armaxiter)</string>
     <string name="procopt_number_of_filter_iterations_title">Number of filter iterations (pos2-niter)</string>
     <string name="procopt_max_averaging_epochs_title">Max averaging epochs (ant2-maxaveep)</string>
     <string name="procopt_ar_filter_title">AR filtering to reject bad sats (pos2-arfilter)</string>
@@ -450,7 +454,7 @@
         <item>1</item>
     </string-array>
 
-    <string name="procopt_min_fix_to_hold_ambiguity_title">Min fix to hold ambiguity (pos2-arminfix)</string>
+    <string name="procopt_armin_fix_ambiguity_title">Min fix count to hold ambiguity (pos2-arminfix)</string>
     <string name="procopt_min_elevation_to_hold_ambiguity_title">Min elevation to hold ambiguity (pos2-elmaskhold)</string>
 
 

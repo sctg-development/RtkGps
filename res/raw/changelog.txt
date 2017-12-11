@@ -19,6 +19,14 @@
     </style>
   </head>
   <body>
+$ 1.0 Beta 3
+    % Build 34
+    _ 2017-12-11
+       *   re-order Processing options to resemble rtknavi options settings 1 & 2
+       *   add yet more remaining parameters
+       * TODO: test RTKLIB integer ambiguity settings
+       *   Fix translations, and solopt settings
+       *   fix visibility of settings
 $ 1.0 Beta 2
      % Build 33
      _ 2017-12-10

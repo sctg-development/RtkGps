@@ -16,16 +16,18 @@ public enum PositioningMode implements IHasRtklibId {
     KINEMA(2, R.string.pmode_kinema),
     /** positioning mode: static */
     STATIC(3, R.string.pmode_static),
+    /** positioning mode: static start **/
+    STATIC_START(4, R.string.pmode_statstart),
     /** positioning mode: moving-base */
-    MOVEB(4, R.string.pmode_moveb),
+    MOVEB(5, R.string.pmode_moveb),
     /** positioning mode: fixed */
-    FIXED(5, R.string.pmode_fixed),
+    FIXED(6, R.string.pmode_fixed),
     /** positioning mode: PPP-kinemaric */
-    PPP_KINEMA(6, R.string.pmode_ppp_kinema),
+    PPP_KINEMA(7, R.string.pmode_ppp_kinema),
     /** positioning mode: PPP-static */
-    PPP_STATIC(7, R.string.pmode_ppp_static),
+    PPP_STATIC(8, R.string.pmode_ppp_static),
     /** positioning mode: PPP-fixed */
-    PPP_FIXED(8, R.string.pmode_ppp_fixed)
+    PPP_FIXED(9, R.string.pmode_ppp_fixed)
     ;
 
     private final int mRtklibId;
@@ -57,6 +59,7 @@ public enum PositioningMode implements IHasRtklibId {
         return DGPS.equals(this)
                 || KINEMA.equals(this)
                 || STATIC.equals(this)
+                || STATIC_START.equals(this)
                 || MOVEB.equals(this)
                 || FIXED.equals(this);
     }
@@ -72,6 +75,11 @@ public enum PositioningMode implements IHasRtklibId {
                 || STATIC.equals(this)
                 || MOVEB.equals(this)
                 || FIXED.equals(this);
+    }
+
+    public boolean isMoveB() {
+        return MOVEB.equals(this)
+                || MOVEB.equals(this);
     }
 
     public boolean isFixed() {
