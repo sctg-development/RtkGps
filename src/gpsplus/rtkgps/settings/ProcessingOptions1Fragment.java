@@ -578,11 +578,11 @@ public class ProcessingOptions1Fragment extends PreferenceFragment {
         .putString(KEY_OUT_SINGLE, String.valueOf(opts.getOutSingle()))
         .putString(KEY_SYNC_SOL, String.valueOf(opts.getSyncSol()))
         .putString(KEY_FREQ_OPT, String.valueOf(opts.getFreqOpt()))
-        .putString(KEY_AR_OUT_CNT, String.valueOf(opts.getArOutCnt()))
-        .putString(KEY_SLIP_THRES, String.valueOf(opts.getSlipThres()))
-        .putString(KEY_MAX_AGE, String.valueOf(opts.getMaxAge()))
-        .putString(KEY_REJ_GDOP, String.valueOf(opts.getRejGDop()))
-        .putString(KEY_REJ_IONNO, String.valueOf(opts.getRejIonno()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getArOutCnt()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getSlipThres()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getMaxAge()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getRejGDop()))
+        .putString(KEY_FREQ_OPT, String.valueOf(opts.getRejIonno()))
 
         .putString(KEY_MIN_FIX_LOCK, String.valueOf(opts.getMinLockToFixAmbiguity()))
         .putString(KEY_MIN_FIX_RATIO, String.valueOf(opts.getMinElevationToFixAmbiguityRad())) /* fixme*/
