@@ -396,10 +396,9 @@ public class SolutionView extends TableLayout {
                 }
                 mTextViewCovariance.setText(String.format(
                         Locale.US,
-                        "N:%6.3f\nE:%6.3f\nU:%6.3f m",
-                        Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                        Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                        Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
+                        "HRMS:%6.3f\nVRMS:%6.3f m",
+                        2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]),
+                        2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
                         ));
                 break;
         case UTM:
@@ -423,10 +422,9 @@ public class SolutionView extends TableLayout {
             mTextViewCoord4Name.setText(this.getContext().getResources().getStringArray(R.array.solution_view_coordinates_utm)[3]); //Zone:
             mTextViewCovariance.setText(String.format(
                     Locale.US,
-                    "N:%6.3f\nE:%6.3f\nU:%6.3f m",
-                    Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                    Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                    Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
+                    "HRMS:%6.3f\nVRMS:%6.3f m",
+                    2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]),
+                    2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
                     ));
             break;
         case WGS84:
@@ -466,10 +464,9 @@ public class SolutionView extends TableLayout {
             }
             mTextViewCovariance.setText(String.format(
                     Locale.US,
-                    "N:%6.3f\nE:%6.3f\nU:%6.3f m",
-                    Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                    Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                    Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
+                    "HRMS:%6.3f\nVRMS:%6.3f m",
+                        2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]),
+                        2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
                     ));
             break;
         case ECEF:
@@ -532,10 +529,9 @@ public class SolutionView extends TableLayout {
             mTextViewCoord3Value.setText(v3);
             mTextViewCovariance.setText(String.format(
                     Locale.US,
-                    "E:%6.3f\nN:%6.3f\nU:%6.3f m",
-                    Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                    Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                    Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
+                    "HRMS:%6.3f\nVRMS:%6.3f m",
+                        2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]),
+                        2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
                     ));
             break;
         default:
