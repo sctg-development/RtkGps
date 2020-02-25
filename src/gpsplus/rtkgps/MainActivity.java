@@ -166,13 +166,13 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         mNavDrawerServerSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                GpsTime gpsTime = new GpsTime();
-                gpsTime.setTime(System.currentTimeMillis());
-                mSessionCode =String.format("%s_%s",gpsTime.getStringGpsWeek(),gpsTime.getStringGpsTOW());
+                if (!buttonView.isPressed()) {
+                    return;
+                }
                 mDrawerLayout.closeDrawer(mNavDrawer);
                 if (isChecked) {
-                    startRtkService(mSessionCode);
-                }else {
+                    startRtkService();
+                } else {
                     stopRtkService();
                 }
                 invalidateOptionsMenu();
@@ -313,10 +313,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 
         switch (item.getItemId()) {
         case R.id.menu_start_service:
-            mNavDrawerServerSwitch.setChecked(true);
+            startRtkService();
             break;
         case R.id.menu_stop_service:
-            mNavDrawerServerSwitch.setChecked(false);
+            stopRtkService();
             break;
         case R.id.menu_add_point:
             askToAddPointToCrw();
@@ -529,12 +529,15 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         mNavDrawerServerSwitch.setChecked(serviceActive);
     }
 
-    private void startRtkService(String sessionCode) {
-        mSessionCode = sessionCode;
+    private void startRtkService() {
+        GpsTime gpsTime = new GpsTime();
+        gpsTime.setTime(System.currentTimeMillis());
+        mSessionCode =String.format("%s_%s",gpsTime.getStringGpsWeek(),gpsTime.getStringGpsTOW());
         final Intent rtkServiceIntent = new Intent(RtkNaviService.ACTION_START);
         rtkServiceIntent.putExtra(RtkNaviService.EXTRA_SESSION_CODE,mSessionCode);
         rtkServiceIntent.setClass(this, RtkNaviService.class);
         startService(rtkServiceIntent);
+        mNavDrawerServerSwitch.setChecked(true);
     }
 
     public String getSessionCode() {
@@ -542,9 +545,33 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     }
 
     private void stopRtkService() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.PointNameAlertDialogStyle);
+        builder.setTitle("Confirm stop");
+        builder.setMessage("Do you really want to stop service?");
+        builder.setIcon(R.drawable.ic_launcher);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                stopRtkServiceConfirmed();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                if (!mNavDrawerServerSwitch.isChecked()) {
+                    mNavDrawerServerSwitch.setChecked(true);
+                }
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void stopRtkServiceConfirmed() {
         final Intent intent = new Intent(RtkNaviService.ACTION_STOP);
         intent.setClass(this, RtkNaviService.class);
         startService(intent);
+        mNavDrawerServerSwitch.setChecked(false);
     }
 
     public RtkNaviService getRtkService() {
