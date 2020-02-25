@@ -23,6 +23,7 @@ public class StreamNtripClientFragment extends PreferenceFragment {
     private static final String KEY_MOUNTPOINT = "stream_ntrip_client_mountpoint";
     private static final String KEY_USER = "stream_ntrip_client_user";
     private static final String KEY_PASSWORD = "stream_ntrip_client_password";
+    private static final String KEY_PATH = "stream_ntrip_path";
 
     private final PreferenceChangeListener mPreferenceChangeListener;
 
@@ -155,6 +156,7 @@ public class StreamNtripClientFragment extends PreferenceFragment {
             .putString(KEY_MOUNTPOINT, value.mountpoint)
             .putString(KEY_USER, value.user)
             .putString(KEY_PASSWORD, value.password)
+            .putString(KEY_PATH, "")
             .apply();
     }
 
@@ -190,16 +192,33 @@ public class StreamNtripClientFragment extends PreferenceFragment {
 
         etp = (EditTextPreference) findPreference(KEY_PASSWORD);
         etp.setSummary(etp.getText());
+
+        etp = (EditTextPreference) findPreference(KEY_PATH);
+        etp.setSummary(etp.getText());
     }
 
     private class PreferenceChangeListener implements SharedPreferences.OnSharedPreferenceChangeListener {
         @Override
         public void onSharedPreferenceChanged(
                 SharedPreferences sharedPreferences, String key) {
+            if (key.equals(KEY_PATH)) {
+                String path = ((EditTextPreference) findPreference(KEY_PATH)).getText();
+                Value value = SettingsHelper.decodeNtripTcpPath(path);
+                if (value != null) {
+                    ((EditTextPreference) findPreference(KEY_HOST)).setText(value.host);
+                    ((EditTextPreference) findPreference(KEY_PORT)).setText(String.valueOf(value.port));
+                    ((EditTextPreference) findPreference(KEY_MOUNTPOINT)).setText(value.mountpoint);
+                    ((EditTextPreference) findPreference(KEY_USER)).setText(value.user);
+                    ((EditTextPreference) findPreference(KEY_PASSWORD)).setText(value.password);
+                } else {
+                    ((EditTextPreference) findPreference(KEY_PATH)).setText(readSummary(sharedPreferences));
+                }
+            } else {
+                ((EditTextPreference) findPreference(KEY_PATH)).setText(readSummary(sharedPreferences));
+            }
             reloadSummaries();
         }
     };
-
 
     public static Value readSettings(SharedPreferences prefs) {
         return new Value()

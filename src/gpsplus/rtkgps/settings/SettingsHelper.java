@@ -16,11 +16,15 @@ import gpsplus.rtklib.constants.SolutionFormat;
 import gpsplus.rtklib.constants.StreamFormat;
 import gpsplus.rtklib.constants.StreamType;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SettingsHelper {
 
+    static final String NTRIP_REGEX = "ntrip://([^:]+):([^@]+)@([^:]+):([0-9]+)/(.+)";
 
     static class StreamDefaultsBase {
 
@@ -471,5 +475,20 @@ public class SettingsHelper {
        return path.toString();
    }
 
+   static StreamNtripClientFragment.Value decodeNtripTcpPath(String path) {
+       StreamNtripClientFragment.Value value = new StreamNtripClientFragment.Value();
+       Pattern pattern = Pattern.compile(NTRIP_REGEX);
+       Matcher matcher = pattern.matcher(path);
+       if (!matcher.find()) {
+          return null;
+       }
+       value
+          .setUser(matcher.group(1))
+          .setPassword(matcher.group(2))
+          .setHost(matcher.group(3))
+          .setPort(Integer.parseInt(matcher.group(4)))
+          .setMountpoint(matcher.group(5));
+       return value;
+   }
 
 }
