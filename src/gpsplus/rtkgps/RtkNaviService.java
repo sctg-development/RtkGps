@@ -136,7 +136,8 @@ public class RtkNaviService extends IntentService implements LocationListener {
     private static final int NOTIFICATION = R.string.local_service_started;
     private static NotificationCompat.Builder notificationBuilder;
     private static NotificationManagerCompat notificationManager;
-    private SolutionStatus previousSolutionStatus;
+    private static SolutionStatus previousSolutionStatus;
+    private static Context context;
 
     private RtkCommon rtkCommon;
 
@@ -166,10 +167,10 @@ public class RtkNaviService extends IntentService implements LocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this.getBaseContext();
 
         final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mCpuLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-
     }
 
     @Override
@@ -839,15 +840,27 @@ public class RtkNaviService extends IntentService implements LocationListener {
         }
     }
 
-    private void setNotificationSolutionStatus(SolutionStatus solutionStatus) {
+    private static void setNotificationSolutionStatus(SolutionStatus solutionStatus) {
         int resId = solutionStatus.getNameResId();
-        String solutionStatusText = getString(resId);
+        String solutionStatusText = context.getString(resId);
         notificationBuilder.setContentText(solutionStatusText);
         notificationBuilder.setSmallIcon(solutionStatus.getIconResId());
     }
 
-    private void updateNotification() {
+    private static void updateNotification() {
         notificationManager.notify(NOTIFICATION, notificationBuilder.build());
+    }
+
+    public static void setNotificationSolutionStatusWithUpdate(SolutionStatus solutionStatus) {
+        if (
+            previousSolutionStatus != solutionStatus &&
+            notificationBuilder != null &&
+            notificationManager != null
+        ) {
+            setNotificationSolutionStatus(solutionStatus);
+            updateNotification();
+            previousSolutionStatus = solutionStatus;
+        }
     }
 
     /* (non-Javadoc)
@@ -864,11 +877,7 @@ public class RtkNaviService extends IntentService implements LocationListener {
                     RtkControlResult result = getRtkStatus(null);
                     Solution solution = result.getSolution();
                     SolutionStatus solutionStatus = solution.getSolutionStatus();
-                    if (previousSolutionStatus != solutionStatus) {
-                        setNotificationSolutionStatus(solutionStatus);
-                        updateNotification();
-                        previousSolutionStatus = solutionStatus;
-                    }
+                    setNotificationSolutionStatusWithUpdate(solutionStatus);
                     if (mBoolMockLocationsPref || mBoolGenerateGPXTrace)
                     {
                         Position3d positionECEF = solution.getPosition();

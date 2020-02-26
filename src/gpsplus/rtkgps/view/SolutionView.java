@@ -275,6 +275,7 @@ public class SolutionView extends TableLayout {
         mSolutionIndicatorView.setStatus(solStatus);
         updateCoordinates(status);
         updateAgeText(sol);
+        RtkNaviService.setNotificationSolutionStatusWithUpdate(solStatus);
     }
 
     public void setFormat(Format format) {
