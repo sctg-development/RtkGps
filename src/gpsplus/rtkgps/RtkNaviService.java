@@ -63,6 +63,7 @@ import gpsplus.rtklib.RtkServerStreamStatus;
 import gpsplus.rtklib.Solution;
 import gpsplus.rtklib.constants.EphemerisOption;
 import gpsplus.rtklib.constants.GeoidModel;
+import gpsplus.rtklib.constants.SolutionStatus;
 import gpsplus.rtklib.constants.StreamType;
 
 import java.io.BufferedWriter;
@@ -135,6 +136,8 @@ public class RtkNaviService extends IntentService implements LocationListener {
     private static final int NOTIFICATION = R.string.local_service_started;
     private static NotificationCompat.Builder notificationBuilder;
     private static NotificationManagerCompat notificationManager;
+    private SolutionStatus previousSolutionStatus;
+
     private RtkCommon rtkCommon;
 
     // Binder given to clients
@@ -855,10 +858,19 @@ public class RtkNaviService extends IntentService implements LocationListener {
 
             {
                 try {
+                    RtkControlResult result = getRtkStatus(null);
+                    Solution solution = result.getSolution();
+                    SolutionStatus solutionStatus = solution.getSolutionStatus();
+
+                    if (previousSolutionStatus != solutionStatus) {
+                        int resId = solutionStatus.getNameResId();
+                        String solutionStatusText = getString(resId);
+                        RtkNaviService.updateNotificationText(solutionStatusText);
+                    }
+                    previousSolutionStatus = solutionStatus;
+
                     if (mBoolMockLocationsPref || mBoolGenerateGPXTrace)
                     {
-                        RtkControlResult result = getRtkStatus(null);
-                        Solution solution = result.getSolution();
                         Position3d positionECEF = solution.getPosition();
 
                         if (RtkCommon.norm(positionECEF.getValues()) > 0.0)
