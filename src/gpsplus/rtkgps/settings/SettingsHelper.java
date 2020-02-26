@@ -26,6 +26,12 @@ public class SettingsHelper {
 
     static final String NTRIP_REGEX = "ntrip://(?:([^:]+)(?::([^@]+))?@)?([^:]+)(?::([0-9]+))?/(.+)";
 
+    static final int USER = 1;
+    static final int PASSWORD = 2;
+    static final int HOST = 3;
+    static final int PORT = 4;
+    static final int MOUNTPOINT = 5;
+
     static class StreamDefaultsBase {
 
         protected boolean enable;
@@ -483,15 +489,15 @@ public class SettingsHelper {
           return null;
        }
        value
-          .setUser(fixEmpty(matcher.group(1)))
-          .setPassword(fixEmpty(matcher.group(2)))
-          .setHost(matcher.group(3))
+          .setUser(fixEmpty(matcher.group(USER)))
+          .setPassword(fixEmpty(matcher.group(PASSWORD)))
+          .setHost(matcher.group(HOST))
           .setPort(
-             matcher.group(4) == null
+             matcher.group(PORT) == null
              ? StreamNtripClientFragment.Value.DEFAULT_PORT
-             : Integer.parseInt(matcher.group(4))
+             : Integer.parseInt(matcher.group(PORT))
           )
-          .setMountpoint(matcher.group(5));
+          .setMountpoint(matcher.group(MOUNTPOINT));
        return value;
    }
 
