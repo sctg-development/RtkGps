@@ -397,6 +397,8 @@ public class RtkNaviService extends IntentService implements LocationListener {
 
         notificationManager = NotificationManagerCompat.from(this);
         notificationBuilder = createForegroundNotificationBuilder();
+        previousSolutionStatus = SolutionStatus.NONE;
+        setNotificationSolutionStatus(previousSolutionStatus);
         startForeground(NOTIFICATION, notificationBuilder.build());
 
         SharedPreferences prefs = this.getBaseContext().getSharedPreferences(SolutionOutputSettingsFragment.SHARED_PREFS_NAME, 0);
@@ -442,16 +444,6 @@ public class RtkNaviService extends IntentService implements LocationListener {
         //load satellite antennas
         loadSatAnt(MainActivity.getApplicationDirectory()+File.separator+"files"+File.separator+"data"+File.separator+"igs05.atx");
         mBoolIsRunning = true;
-    }
-
-    public static void updateNotificationText(String text) {
-        if (
-            notificationBuilder == null ||
-            notificationManager == null ||
-            mbStarted == false
-        ) return;
-        notificationBuilder.setContentText(text);
-        notificationManager.notify(NOTIFICATION, notificationBuilder.build());
     }
 
     private void processStop() {
@@ -847,6 +839,17 @@ public class RtkNaviService extends IntentService implements LocationListener {
         }
     }
 
+    private void setNotificationSolutionStatus(SolutionStatus solutionStatus) {
+        int resId = solutionStatus.getNameResId();
+        String solutionStatusText = getString(resId);
+        notificationBuilder.setContentText(solutionStatusText);
+        notificationBuilder.setSmallIcon(solutionStatus.getIconResId());
+    }
+
+    private void updateNotification() {
+        notificationManager.notify(NOTIFICATION, notificationBuilder.build());
+    }
+
     /* (non-Javadoc)
      * @see android.app.IntentService#onHandleIntent(android.content.Intent)
      */
@@ -861,14 +864,11 @@ public class RtkNaviService extends IntentService implements LocationListener {
                     RtkControlResult result = getRtkStatus(null);
                     Solution solution = result.getSolution();
                     SolutionStatus solutionStatus = solution.getSolutionStatus();
-
                     if (previousSolutionStatus != solutionStatus) {
-                        int resId = solutionStatus.getNameResId();
-                        String solutionStatusText = getString(resId);
-                        RtkNaviService.updateNotificationText(solutionStatusText);
+                        setNotificationSolutionStatus(solutionStatus);
+                        updateNotification();
+                        previousSolutionStatus = solutionStatus;
                     }
-                    previousSolutionStatus = solutionStatus;
-
                     if (mBoolMockLocationsPref || mBoolGenerateGPXTrace)
                     {
                         Position3d positionECEF = solution.getPosition();
