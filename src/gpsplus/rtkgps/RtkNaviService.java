@@ -399,7 +399,7 @@ public class RtkNaviService extends IntentService implements LocationListener {
         prefs = this.getBaseContext().getSharedPreferences(ProcessingOptions1Fragment.SHARED_PREFS_NAME, 0);
         mLProcessingCycle = Long.valueOf(prefs.getString(ProcessingOptions1Fragment.KEY_PROCESSING_CYCLE, "5"));
         if (mBoolMockLocationsPref) {
-            if (Settings.Secure.getString(getContentResolver(),
+            if (false && Settings.Secure.getString(getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION).equals("0")) {
                 Log.e(RTK_GPS_MOCK_LOC_SERVICE, "Mock Location is not allowed");
             } else {
@@ -408,10 +408,15 @@ public class RtkNaviService extends IntentService implements LocationListener {
                 try {
                     locationManager.addTestProvider(GPS_PROVIDER, false, false,
                             false, false, true, false, true, 0, Criteria.ACCURACY_FINE);
-                } catch (IllegalArgumentException e) {
-                    Log.e(RTK_GPS_MOCK_LOC_SERVICE, "Mock Location gps provider already exist");
+                } catch (Exception e) {
+                    Log.e(RTK_GPS_MOCK_LOC_SERVICE, "Mock Location is not allowed");
                 }
-                locationManager.setTestProviderEnabled(GPS_PROVIDER, true);
+
+                try {
+                    locationManager.setTestProviderEnabled(GPS_PROVIDER, true);
+                } catch (Exception e) {
+                    Log.e(RTK_GPS_MOCK_LOC_SERVICE, "Mock Location cannot be enabled");
+                }
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     PermissionListener dialogPermissionListener =
@@ -863,7 +868,7 @@ public class RtkNaviService extends IntentService implements LocationListener {
                                         try {
                                             locationManager.setTestProviderLocation(GPS_PROVIDER, currentLocation);
                                         }
-                                        catch (IllegalArgumentException e)
+                                        catch (Exception e)
                                         {
                                             Log.i(RTK_GPS_MOCK_LOC_SERVICE,"Your device does not support MOCK_LOCATION with provider:" +GPS_PROVIDER);
                                         }
