@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 
 public class SettingsHelper {
 
-    static final String NTRIP_REGEX = "ntrip://(?:([^:]+)(?::([^@]+))?@)?([^:]+)(?::([0-9]+))?/(.+)";
+    static final String NTRIP_REGEX = "^ntrip://(?:([^:]+)(?::([^@]+))?@)?([^:]+)(?::([0-9]+))?/(.+)$";
 
     static final int USER = 1;
     static final int PASSWORD = 2;
