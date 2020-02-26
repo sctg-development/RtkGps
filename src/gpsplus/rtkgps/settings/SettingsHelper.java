@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 
 public class SettingsHelper {
 
-    static final String NTRIP_REGEX = "ntrip://([^:]+):([^@]+)@([^:]+):([0-9]+)/(.+)";
+    static final String NTRIP_REGEX = "ntrip://(?:([^:]+)(?::([^@]+))?@)?([^:]+)(?::([0-9]+))?/(.+)";
 
     static class StreamDefaultsBase {
 
@@ -483,12 +483,20 @@ public class SettingsHelper {
           return null;
        }
        value
-          .setUser(matcher.group(1))
-          .setPassword(matcher.group(2))
+          .setUser(fixEmpty(matcher.group(1)))
+          .setPassword(fixEmpty(matcher.group(2)))
           .setHost(matcher.group(3))
-          .setPort(Integer.parseInt(matcher.group(4)))
+          .setPort(
+             matcher.group(4) == null
+             ? StreamNtripClientFragment.Value.DEFAULT_PORT
+             : Integer.parseInt(matcher.group(4))
+          )
           .setMountpoint(matcher.group(5));
        return value;
+   }
+
+   static String fixEmpty(String value) {
+      return value == null ? "" : value;
    }
 
 }
