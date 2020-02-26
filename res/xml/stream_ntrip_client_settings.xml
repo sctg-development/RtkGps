@@ -35,7 +35,7 @@
         android:key="stream_ntrip_client_category_path"
         android:title="@string/ntrip_client_category_path">
 
-        <EditTextPreference
+        <gpsplus.rtkgps.settings.NtripPathEditTextPreference
             android:key="stream_ntrip_path"
             android:title="@string/ntrip_client_path_title"
             android:inputType="textUri" />
