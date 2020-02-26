@@ -159,6 +159,7 @@ public class SolutionView extends TableLayout {
     private Format mSolutionFormat;
 
     private boolean mBoolIsGeodetic = false;
+    private SolutionStatus previousSolutionStatus;
 
     private final NumberFormat mCoordEcefFormatter;
 
@@ -275,6 +276,11 @@ public class SolutionView extends TableLayout {
         mSolutionIndicatorView.setStatus(solStatus);
         updateCoordinates(status);
         updateAgeText(sol);
+        if (previousSolutionStatus != solStatus) {
+            String solStatusText = this.getContext().getResources().getString(resId);
+            RtkNaviService.updateNotificationText(solStatusText);
+        }
+        previousSolutionStatus = solStatus;
     }
 
     public void setFormat(Format format) {

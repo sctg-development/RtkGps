@@ -23,6 +23,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.widget.Toast;
 import butterknife.BindString;
@@ -131,7 +132,9 @@ public class RtkNaviService extends IntentService implements LocationListener {
     private static final String MM_MAP_HEADER = "COMPD_CS[\"WGS 84\",GEOGCS[\"\",DATUM[\"WGS 84\",SPHEROID[\"WGS 84\",6378137,298.257223563],TOWGS84[0,0,0,0,0,0,0]],PRIMEM[\"Greenwich\",0],UNIT[\"Degrees\",0.0174532925199433],AXIS[\"Long\",East],AXIS[\"Lat\",North]],VERT_CS[\"\",VERT_DATUM[\"Ellipsoid\",2002],UNIT[\"Meters\",1],AXIS[\"Height\",Up]]]\r\n";
     private static final String GPS_PROVIDER = LocationManager.GPS_PROVIDER;
     private boolean mHavePoint = false;
-    private int NOTIFICATION = R.string.local_service_started;
+    private static final int NOTIFICATION = R.string.local_service_started;
+    private static NotificationCompat.Builder notificationBuilder;
+    private static NotificationManagerCompat notificationManager;
     private RtkCommon rtkCommon;
 
     // Binder given to clients
@@ -389,8 +392,9 @@ public class RtkNaviService extends IntentService implements LocationListener {
 
         mCpuLock.acquire();
 
-        Notification notification = createForegroundNotification();
-        startForeground(NOTIFICATION, notification);
+        notificationManager = NotificationManagerCompat.from(this);
+        notificationBuilder = createForegroundNotificationBuilder();
+        startForeground(NOTIFICATION, notificationBuilder.build());
 
         SharedPreferences prefs = this.getBaseContext().getSharedPreferences(SolutionOutputSettingsFragment.SHARED_PREFS_NAME, 0);
         mBoolMockLocationsPref = prefs.getBoolean(SolutionOutputSettingsFragment.KEY_OUTPUT_MOCK_LOCATION, false);
@@ -437,6 +441,15 @@ public class RtkNaviService extends IntentService implements LocationListener {
         mBoolIsRunning = true;
     }
 
+    public static void updateNotificationText(String text) {
+        if (
+            notificationBuilder == null ||
+            notificationManager == null ||
+            mbStarted == false
+        ) return;
+        notificationBuilder.setContentText(text);
+        notificationManager.notify(NOTIFICATION, notificationBuilder.build());
+    }
 
     private void processStop() {
         mBoolIsRunning = false;
@@ -628,7 +641,7 @@ public class RtkNaviService extends IntentService implements LocationListener {
     }
 
     @SuppressWarnings("deprecation")
-    private Notification createForegroundNotification() {
+    private NotificationCompat.Builder createForegroundNotificationBuilder() {
         CharSequence text = getText(R.string.local_service_started);
 
         // The PendingIntent to launch our activity if the user selects this
@@ -645,7 +658,7 @@ public class RtkNaviService extends IntentService implements LocationListener {
         builder.setNumber(100);
         builder.setAutoCancel(false);
 
-        return builder.build();
+        return builder;
     }
 
     private class BluetoothCallbacks implements BluetoothToRtklib.Callbacks {
