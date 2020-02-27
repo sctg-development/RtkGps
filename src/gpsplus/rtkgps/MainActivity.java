@@ -31,6 +31,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.multi.DialogOnAnyDeniedMultiplePermissionsListener;
@@ -51,6 +52,7 @@ import gpsplus.rtkgps.settings.SolutionOutputSettingsFragment;
 import gpsplus.rtkgps.settings.StreamSettingsActivity;
 import gpsplus.rtkgps.utils.ChangeLog;
 import gpsplus.rtkgps.utils.GpsTime;
+import gpsplus.rtkgps.utils.ZipHelper;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -477,6 +479,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         case R.id.navdraw_item_ntripcaster_options:
             showSettings(itemId);
             break;
+        case R.id.navdraw_item_save_settings:
+            showSettingsSaveToFile();
+            break;
         default:
             throw new IllegalStateException();
         }
@@ -593,6 +598,23 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         startActivity(intent);
     }
 
+    private void showSettingsSaveToFile() {
+        String dirname = this.getFilesDir().getAbsolutePath() + "/../shared_prefs";
+        File[] files = new File(dirname).listFiles();
+        String[] filenames = new String[files.length];
+        for (int i = 0; i < files.length; i++) {
+            filenames[i] = files[i].getAbsolutePath();
+        }
+        String zipFileName = getFileStorageDirectory().getAbsolutePath() + "/settings.zip";
+        ZipHelper.zip(filenames, zipFileName);
+        Toast.makeText(this,
+            String.format(
+                getResources().getString(R.string.navdraw_item_save_settings_finished),
+                zipFileName
+            ),
+            Toast.LENGTH_LONG
+        ).show();
+    }
 
     public void onNavDrawevItemClicked(View v) {
         selectDrawerItem(v.getId());
