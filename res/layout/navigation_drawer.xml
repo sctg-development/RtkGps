@@ -104,5 +104,11 @@
                 android:text="@string/navdraw_item_save_settings"
                 android:onClick="onNavDrawevItemClicked" />
 
+            <TextView
+                style="@style/NavigationDrawerItem"
+                android:id="@+id/navdraw_item_load_settings"
+                android:text="@string/navdraw_item_load_settings"
+                android:onClick="onNavDrawevItemClicked" />
+
         </LinearLayout>
 </ScrollView>

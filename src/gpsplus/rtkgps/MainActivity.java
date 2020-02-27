@@ -482,6 +482,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         case R.id.navdraw_item_save_settings:
             showSettingsSaveToFile();
             break;
+        case R.id.navdraw_item_load_settings:
+            showSettingsLoadFromFile();
+            break;
         default:
             throw new IllegalStateException();
         }
@@ -599,21 +602,56 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     }
 
     private void showSettingsSaveToFile() {
-        String dirname = this.getFilesDir().getAbsolutePath() + "/../shared_prefs";
-        File[] files = new File(dirname).listFiles();
+        File[] files = new File(getSharedPreferencesDirectoryname()).listFiles();
         String[] filenames = new String[files.length];
         for (int i = 0; i < files.length; i++) {
             filenames[i] = files[i].getAbsolutePath();
         }
-        String zipFileName = getFileStorageDirectory().getAbsolutePath() + "/settings.zip";
-        ZipHelper.zip(filenames, zipFileName);
-        Toast.makeText(this,
-            String.format(
+        String zipFileName = getSettingsZipFileName();
+        String message;
+        try {
+            ZipHelper.zip(filenames, zipFileName);
+            message = String.format(
                 getResources().getString(R.string.navdraw_item_save_settings_finished),
                 zipFileName
-            ),
-            Toast.LENGTH_LONG
-        ).show();
+            );
+        } catch (IOException e) {
+            message = String.format(
+                getResources().getString(R.string.navdraw_item_save_settings_failed),
+                zipFileName
+            );
+        }
+        displayToast(message);
+    }
+
+    private void showSettingsLoadFromFile() {
+        String zipFileName = getSettingsZipFileName();
+        String message;
+        try {
+            ZipHelper.unzip(zipFileName, getSharedPreferencesDirectoryname());
+            message = String.format(
+                getResources().getString(R.string.navdraw_item_load_settings_finished),
+                zipFileName
+            );
+        } catch (IOException e) {
+            message = String.format(
+                getResources().getString(R.string.navdraw_item_load_settings_failed),
+                zipFileName
+            );
+        }
+        displayToast(message);
+    }
+
+    private String getSharedPreferencesDirectoryname() {
+        return this.getFilesDir().getAbsolutePath() + "/../shared_prefs";
+    }
+
+    private String getSettingsZipFileName() {
+        return getFileStorageDirectory().getAbsolutePath() + "/settings.zip";
+    }
+
+    private void displayToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     public void onNavDrawevItemClicked(View v) {
