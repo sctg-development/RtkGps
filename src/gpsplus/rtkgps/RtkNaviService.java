@@ -51,6 +51,7 @@ import gpsplus.rtkgps.utils.GpsTime;
 import gpsplus.rtkgps.utils.PreciseEphemerisDownloader;
 import gpsplus.rtkgps.utils.PreciseEphemerisProvider;
 import gpsplus.rtkgps.utils.Shapefile;
+import gpsplus.rtkgps.view.SolutionView;
 import gpsplus.rtklib.RtkCommon;
 import gpsplus.rtklib.RtkCommon.Position3d;
 import gpsplus.rtklib.RtkControlResult;
@@ -854,11 +855,28 @@ public class RtkNaviService extends IntentService implements LocationListener {
 
                             if (mBoolMockLocationsPref)
                             {
-                                Location currentLocation = createLocation(Math.toDegrees(positionLatLon.getLat()), Math.toDegrees(positionLatLon.getLon()),positionLatLon.getHeight(), 1f);
                                 if (mBoolLocationServiceIsConnected || true) // TO be corrected for Google maps API
                                     {
                                      // provide the new location
                                      //   Log.i(RTK_GPS_MOCK_LOCATION_SERVICE,"Mock location is "+currentLocation.getLatitude()+" "+currentLocation.getLongitude());
+
+                                        // compute accuracy (HRMS)
+                                        RtkCommon.Matrix3x3 cov = solution.getQrMatrix();
+                                        Position3d roverPos = RtkCommon.ecef2pos(positionECEF);
+                                        double lat = roverPos.getLat();
+                                        double lon = roverPos.getLon();
+                                        double[] Qe = RtkCommon.covenu(lat, lon, cov).getValues();
+                                        double HRMS = SolutionView.computeHRMS(Qe);
+
+                                        Location currentLocation = createLocation(
+                                            Math.toDegrees(positionLatLon.getLat()),
+                                            Math.toDegrees(positionLatLon.getLon()),
+                                            positionLatLon.getHeight(),
+                                            (float) HRMS
+                                        );
+
+                                        Log.i(RTK_GPS_MOCK_LOC_SERVICE,"Mock location is "+currentLocation.getLatitude()+" "+currentLocation.getLongitude()+ " accuracy " + HRMS + " m");
+
                                         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                                         try {
                                             locationManager.setTestProviderLocation(GPS_PROVIDER, currentLocation);
