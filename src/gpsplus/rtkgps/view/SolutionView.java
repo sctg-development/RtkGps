@@ -578,9 +578,17 @@ public class SolutionView extends TableLayout {
         return String.format(
             Locale.US,
             "HRMS:%6.3f m\nVRMS:%6.3f m",
-            2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]),
-            2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
+            computeHRMS(Qe),
+            computeVRMS(Qe)
         );
+    }
+
+    public static double computeHRMS(double[] Qe) {
+        return 2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]);
+    }
+
+    public static double computeVRMS(double[] Qe) {
+        return 2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8]);
     }
 
     public static class SolutionIndicatorView extends View {
