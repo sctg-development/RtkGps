@@ -71,6 +71,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class RtkNaviService extends IntentService implements LocationListener {
@@ -843,7 +845,12 @@ public class RtkNaviService extends IntentService implements LocationListener {
     private static void setNotificationSolutionStatus(SolutionStatus solutionStatus) {
         int resId = solutionStatus.getNameResId();
         String solutionStatusText = context.getString(resId);
-        notificationBuilder.setContentText(solutionStatusText);
+        String contentText = String.format(
+            context.getString(R.string.local_service_notification_content),
+            solutionStatusText,
+            new SimpleDateFormat("HH:mm:ss").format(new Date())
+        );
+        notificationBuilder.setContentText(contentText);
         notificationBuilder.setSmallIcon(solutionStatus.getIconResId());
     }
 
