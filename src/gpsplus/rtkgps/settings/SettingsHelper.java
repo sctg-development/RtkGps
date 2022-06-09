@@ -16,11 +16,21 @@ import gpsplus.rtklib.constants.SolutionFormat;
 import gpsplus.rtklib.constants.StreamFormat;
 import gpsplus.rtklib.constants.StreamType;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class SettingsHelper {
 
+    static final String NTRIP_REGEX = "^ntrip://(?:([^:]+)(?::([^@]+))?@)?([^:]+)(?::([0-9]+))?/(.+)$";
+
+    static final int USER = 1;
+    static final int PASSWORD = 2;
+    static final int HOST = 3;
+    static final int PORT = 4;
+    static final int MOUNTPOINT = 5;
 
     static class StreamDefaultsBase {
 
@@ -471,5 +481,28 @@ public class SettingsHelper {
        return path.toString();
    }
 
+   static StreamNtripClientFragment.Value decodeNtripTcpPath(String path) {
+       StreamNtripClientFragment.Value value = new StreamNtripClientFragment.Value();
+       Pattern pattern = Pattern.compile(NTRIP_REGEX);
+       Matcher matcher = pattern.matcher(path);
+       if (!matcher.find()) {
+          return null;
+       }
+       value
+          .setUser(fixEmpty(matcher.group(USER)))
+          .setPassword(fixEmpty(matcher.group(PASSWORD)))
+          .setHost(matcher.group(HOST))
+          .setPort(
+             matcher.group(PORT) == null
+             ? StreamNtripClientFragment.Value.DEFAULT_PORT
+             : Integer.parseInt(matcher.group(PORT))
+          )
+          .setMountpoint(matcher.group(MOUNTPOINT));
+       return value;
+   }
+
+   static String fixEmpty(String value) {
+      return value == null ? "" : value;
+   }
 
 }

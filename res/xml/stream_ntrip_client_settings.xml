@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    <EditTextPreference
-        android:key="stream_ntrip_client_host"
-        android:title="@string/ntrip_client_host_title"
-        android:inputType="textUri" />
-    
-    <EditTextPreference
-        android:key="stream_ntrip_client_port"
-        android:title="@string/ntrip_client_port_title"
-        android:inputType="number" />
-    
-    <EditTextPreference
-        android:key="stream_ntrip_client_mountpoint"
-        android:title="@string/ntrip_client_mountpoint_title" />
-    
-    <EditTextPreference
-        android:key="stream_ntrip_client_user"
-        android:title="@string/ntrip_client_user_title"
-        android:inputType="textPersonName" />
-    
-	<EditTextPreference
-        android:key="stream_ntrip_client_password"
-        android:title="@string/ntrip_client_password_title"
-        android:inputType="textVisiblePassword" />
+
+    <PreferenceCategory
+        android:key="stream_ntrip_client_category_individual"
+        android:title="@string/ntrip_client_category_individual">
+
+        <EditTextPreference
+            android:key="stream_ntrip_client_host"
+            android:title="@string/ntrip_client_host_title"
+            android:inputType="textUri" />
+
+        <EditTextPreference
+            android:key="stream_ntrip_client_port"
+            android:title="@string/ntrip_client_port_title"
+            android:inputType="number" />
+
+        <EditTextPreference
+            android:key="stream_ntrip_client_mountpoint"
+            android:title="@string/ntrip_client_mountpoint_title" />
+
+        <EditTextPreference
+            android:key="stream_ntrip_client_user"
+            android:title="@string/ntrip_client_user_title"
+            android:inputType="textPersonName" />
+
+        <EditTextPreference
+            android:key="stream_ntrip_client_password"
+            android:title="@string/ntrip_client_password_title"
+            android:inputType="textVisiblePassword" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="stream_ntrip_client_category_path"
+        android:title="@string/ntrip_client_category_path">
+
+        <gpsplus.rtkgps.settings.NtripPathEditTextPreference
+            android:key="stream_ntrip_path"
+            android:title="@string/ntrip_client_path_title"
+            android:inputType="textUri" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
