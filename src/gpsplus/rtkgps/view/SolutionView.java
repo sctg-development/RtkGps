@@ -394,13 +394,7 @@ public class SolutionView extends TableLayout {
                 }else{
                     mTextViewCoord3Name.setText(this.getContext().getResources().getStringArray(R.array.solution_view_coordinates_wgs84)[2]); //Height
                 }
-                mTextViewCovariance.setText(String.format(
-                        Locale.US,
-                        "N:%6.3f\nE:%6.3f\nU:%6.3f m",
-                        Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                        Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                        Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
-                        ));
+                mTextViewCovariance.setText(formatRMS(Qe));
                 break;
         case UTM:
             dGeoidHeight = getAltitudeCorrection(lat, lon);
@@ -421,13 +415,7 @@ public class SolutionView extends TableLayout {
                 mTextViewCoord3Name.setText(this.getContext().getResources().getStringArray(R.array.solution_view_coordinates_wgs84)[2]); //Height
             }
             mTextViewCoord4Name.setText(this.getContext().getResources().getStringArray(R.array.solution_view_coordinates_utm)[3]); //Zone:
-            mTextViewCovariance.setText(String.format(
-                    Locale.US,
-                    "N:%6.3f\nE:%6.3f\nU:%6.3f m",
-                    Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                    Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                    Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
-                    ));
+            mTextViewCovariance.setText(formatRMS(Qe));
             break;
         case WGS84:
         case WGS84_FLOAT:
@@ -464,13 +452,7 @@ public class SolutionView extends TableLayout {
             {
                 mTextViewCoord4Value.setText("");
             }
-            mTextViewCovariance.setText(String.format(
-                    Locale.US,
-                    "N:%6.3f\nE:%6.3f\nU:%6.3f m",
-                    Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                    Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                    Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
-                    ));
+            mTextViewCovariance.setText(formatRMS(Qe));
             break;
         case ECEF:
             final float[] qr = sol.getPositionVariance();
@@ -530,13 +512,7 @@ public class SolutionView extends TableLayout {
             mTextViewCoord1Value.setText(v1);
             mTextViewCoord2Value.setText(v2);
             mTextViewCoord3Value.setText(v3);
-            mTextViewCovariance.setText(String.format(
-                    Locale.US,
-                    "E:%6.3f\nN:%6.3f\nU:%6.3f m",
-                    Math.sqrt(Qe[0] < 0 ? 0 : Qe[0]),
-                    Math.sqrt(Qe[4] < 0 ? 0 : Qe[4]),
-                    Math.sqrt(Qe[8] < 0 ? 0 : Qe[8])
-                    ));
+            mTextViewCovariance.setText(formatRMS(Qe));
             break;
         default:
             throw new IllegalStateException();
@@ -596,6 +572,23 @@ public class SolutionView extends TableLayout {
             mTextViewCoord4Name.setText("");
             mTextViewCoord4Value.setText("");
         }
+    }
+
+    private static String formatRMS(double[] Qe) {
+        return String.format(
+            Locale.US,
+            "HRMS:%6.3f m\nVRMS:%6.3f m",
+            computeHRMS(Qe),
+            computeVRMS(Qe)
+        );
+    }
+
+    public static double computeHRMS(double[] Qe) {
+        return 2*Math.sqrt(Qe[4] < 0 ? 0 : Qe[4] + Qe[0] < 0 ? 0 : Qe[0]);
+    }
+
+    public static double computeVRMS(double[] Qe) {
+        return 2*Math.sqrt(Qe[8] < 0 ? 0 : Qe[8]);
     }
 
     public static class SolutionIndicatorView extends View {
