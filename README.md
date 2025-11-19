@@ -1,5 +1,5 @@
 ![](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/RtkGps?type=C,Cpp,Java&category=code)  
-![](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/RtkGps?type=C,Cpp,Java&category=comment) 
+![](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/RtkGps?type=C,Cpp,Java&category=comments) 
 
 RtkGps+
 =======
